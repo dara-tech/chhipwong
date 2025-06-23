@@ -1,0 +1,342 @@
+{
+  "welcome": "សូមស្វាគមន៍មកកាន់ KH HARA",
+  "login": "ចូលប្រើប្រាស់",
+  "professional": "អ្នកជំនាញ",
+  "users": "អ្នកប្រើប្រាស់",
+  "home": "ទំព័រដើម",
+  "register": "ចុះឈ្មោះ",
+  "professionalsManager": {
+    "title": "អ្នកជំនាញរបស់យើង",
+    "phone": "ទូរស័ព្ទ",
+    "phonePlaceholder": "បញ្ចូលលេខទូរស័ព្ទ",
+    "allProfessionals": "អ្នកជំនាញទាំងអស់",
+    "subtitle": "ស្គាល់អ្នកជំនាញដែលជាកម្លាំងចលករនៅពីក្រោយភាពជោគជ័យរបស់យើង",
+    "fetchError": "មិនអាចទាញយកទិន្នន័យអ្នកជំនាញបានទេ",
+    "searchPlaceholder": "ស្វែងរកតាមឈ្មោះ ឬតួនាទី...",
+    "allCompanies": "ក្រុមហ៊ុនទាំងអស់",
+    "noResults": "រកមិនឃើញអ្នកជំនាញតាមលក្ខណៈវិនិច្ឆ័យរបស់អ្នកទេ",
+    "addProfessional": "បន្ថែមអ្នកជំនាញ",
+    "removeProfessional": "លុបអ្នកជំនាញ",
+    "noProfessionals": "មិនទាន់មានអ្នកជំនាញនៅឡើយទេ",
+    "name": "ឈ្មោះ",
+    "role": "តួនាទី",
+    "email": "អ៊ីមែល",
+    "description": "ការពិពណ៌នា",
+    "namePlaceholder": "បញ្ចូលឈ្មោះអ្នកជំនាញ",
+    "rolePlaceholder": "ឧ. នាយកប្រតិបត្តិ ឬអ្នកអភិវឌ្ឍន៍",
+    "emailPlaceholder": "បញ្ចូលអ៊ីមែលអ្នកជំនាញ",
+    "descriptionPlaceholder": "ពិពណ៌នាខ្លីៗអំពីតួនាទី និងបទពិសោធន៍របស់អ្នកជំនាញ",
+    "loading": "កំពុងផ្ទុក..."
+  },
+  "logoUpload": {
+    "previewAlt": "មើលរូបឡូហ្គោ",
+    "errorInvalidType": "សូមផ្ទុកឡើងឯកសាររូបភាពត្រឹមត្រូវ (PNG, JPG, GIF)",
+    "errorSizeTooLarge": "ទំហំឯកសារធំពេក។ សូមផ្ទុកឡើងរូបភាពមិនលើស 5MB",
+    "errorTooSmall": "រូបភាពតូចពេក។ ត្រូវការទំហំអប្បបរមា 100x100 ភីកសែល",
+    "errorCorrupted": "ឯកសារដែលអ្នកជ្រើសរើសមិនអាចប្រើបានទេ។ វាអាចខូច",
+    "errorBgRemoval": "មិនអាចដកផ្ទៃខាងក្រោយបានទេ។ នេះអាចកើតឡើងជាមួយរូបភាពដែលមានពណ៌ខ្សោយ",
+    "statusRemovingBg": "កំពុងដកផ្ទៃខាងក្រោយ... {{progress}}%",
+    "statusAnalyzing": "កំពុងវិភាគរូបភាព...",
+    "statusSuccess": "ផ្ទុកឡើងឡូហ្គោដោយជោគជ័យ!",
+    "statusIdle": "អូសនិងទម្លាក់ ឬចុចដើម្បីផ្ទុកឡើង",
+    "title": "ឡូហ្គោក្រុមហ៊ុន",
+    "removeBgButton": "ដកផ្ទៃខាងក្រោយ",
+    "supportedFormats": "គាំទ្រទម្រង់ JPG, PNG, GIF • អតិបរមា 5MB"
+  },
+  "basicInfo": {
+    "about": "អំពីយើង",
+    "aboutPlaceholder": "ប្រាប់យើងអំពីក្រុមហ៊ុនរបស់អ្នក...",
+    "aboutTooltip": "ចែករំលែករឿងរ៉ាវ និងចំណុចពិសេសរបស់ក្រុមហ៊ុនអ្នក (អតិបរមា 500 តួអក្សរ)",
+    "aboutImage": "រូបភាពអំពីយើង",
+    "aboutImageTooltip": "ផ្ទុកឡើងរូបភាពដែលតំណាងឱ្យរឿងរ៉ាវរបស់ក្រុមហ៊ុនអ្នក",
+    "mission": "បេសកកម្ម",
+    "missionPlaceholder": "តើបេសកកម្មរបស់ក្រុមហ៊ុនអ្នកគឺជាអ្វី?",
+    "missionTooltip": "កំណត់គោលបំណង និងគោលដៅរបស់ក្រុមហ៊ុនអ្នក (អតិបរមា 200 តួអក្សរ)",
+    "missionImage": "រូបភាពបេសកកម្ម",
+    "missionImageTooltip": "ផ្ទុកឡើងរូបភាពដែលតំណាងឱ្យបេសកកម្មរបស់ក្រុមហ៊ុនអ្នក",
+    "vision": "ចក្ខុវិស័យ",
+    "visionPlaceholder": "តើចក្ខុវិស័យរបស់ក្រុមហ៊ុនអ្នកគឺជាអ្វី?",
+    "visionTooltip": "ពិពណ៌នាអំពីសេចក្តីប្រាថ្នានាពេលអនាគតរបស់ក្រុមហ៊ុនអ្នក (អតិបរមា 200 តួអក្សរ)",
+    "visionImage": "រូបភាពចក្ខុវិស័យ",
+    "visionImageTooltip": "ផ្ទុកឡើងរូបភាពដែលតំណាងឱ្យចក្ខុវិស័យរបស់ក្រុមហ៊ុនអ្នក"
+  },
+  "contactInfo": {
+    "address": "អាសយដ្ឋាន",
+    "addressPlaceholder": "បញ្ចូលអាសយដ្ឋានក្រុមហ៊ុន",
+    "phone": "ទូរស័ព្ទ",
+    "phonePlaceholder": "បញ្ចូលលេខទូរស័ព្ទ",
+    "email": "អ៊ីមែល",
+    "emailPlaceholder": "បញ្ចូលអាសយដ្ឋានអ៊ីមែល",
+    "mapLocation": "ទីតាំងផែនទី",
+    "mapLocationPlaceholder": "បញ្ចូលតំណ Google Maps",
+    "mapLocationHelper": "បញ្ចូល URL ទីតាំង Google Maps របស់អ្នកនៅទីនេះ"
+  },
+  "socialMedia": {
+    "facebook": "ហ្វេសប៊ុក",
+    "facebookPlaceholder": "https://facebook.com/your-page",
+    "instagram": "អុិនស្តាក្រាម",
+    "instagramPlaceholder": "https://instagram.com/your-profile",
+    "youtube": "យូធូប",
+    "youtubePlaceholder": "https://youtube.com/your-channel",
+    "linkedin": "លីនអ៊ីន",
+    "linkedinPlaceholder": "https://linkedin.com/company/your-company"
+  },
+  "privacyPolicy": {
+    "title": "គោលការណ៍ភាពឯកជន",
+    "bold": "ដិត",
+    "italic": "ទ្រេត",
+    "underline": "បន្ទាត់ក្រោម",
+    "bulletList": "បញ្ជីចំណុច",
+    "orderedList": "បញ្ជីលេខរៀង"
+  },
+  "termsAndConditions": {
+    "title": "លក្ខខណ្ឌ",
+    "bold": "ដិត",
+    "italic": "ទ្រេត",
+    "underline": "បន្ទាត់ក្រោម",
+    "bulletList": "បញ្ជីចំណុច",
+    "orderedList": "បញ្ជីលេខរៀង"
+  },
+  "Profile": "ប្រវត្តិរូប",
+  "settings": "ការកំណត់",
+  "faq": "សំណួរដែលគេសួរញឹកញាប់",
+  "paymentViewer": { 
+    "title": "មើលព័ត៌មានការទូទាត់" 
+  },
+  "paymentViewerPage": {
+    "title": "ព័ត៌មានការទូទាត់",
+    "noPaymentInfo": "មិនទាន់មានព័ត៌មានការទូទាត់នៅឡើយទេ"
+  },
+  "schools": "សាលារៀន",
+  "companies": "ក្រុមហ៊ុន",
+  "contact": "ទំនាក់ទំនង",
+  "about": "អំពីយើង",
+  "mission": "បេសកកម្ម",
+  "Menu": "ម៉ឺនុយ",
+  "vision": "ចក្ខុវិស័យ",
+  "privacy-policy": "គោលការណ៍ភាពឯកជន",
+  "terms-conditions": "លក្ខខណ្ឌ",
+  "language": "ភាសា",
+  "english": "អង់គ្លេស",
+  "khmer": "ខ្មែរ",
+  "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+  "update_profile": "កែប្រែប្រវត្តិរូប",
+  "General Info": "ព័ត៌មានទូទៅ",
+  "Security": "សុវត្ថិភាព",
+  "saving": "កំពុងរក្សាទុក...",
+  "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
+  "form": {
+    "name": "ឈ្មោះ",
+    "email": "អ៊ីមែល",
+    "enterName": "បញ្ចូលឈ្មោះរបស់អ្នក",
+    "enterEmail": "បញ្ចូលអ៊ីមែលរបស់អ្នក"
+  },
+  "menu": {
+    "title": "ម៉ឺនុយ",
+    "admin": "ផ្ទាំងគ្រប់គ្រង",
+    "open": "បើកម៉ឺនុយ"
+  },
+  "auth": {
+    "logout": "ចាកចេញ"
+  },
+  "appName": "KH HARA",
+  "company": {
+    "heroSection": "ផ្នែករូបភាពសំខាន់",
+    "privacyPolicy": "គោលការណ៍ភាពឯកជន",
+    "termsConditions": "លក្ខខណ្ឌ",
+    "heroImage": "រូបភាពសំខាន់",
+    "heroImageAlt": "រូបភាពសំខាន់របស់ក្រុមហ៊ុន",
+    "heroImageTooltip": "ផ្ទុកឡើងរូបភាពដែលមានគុណភាពខ្ពស់សម្រាប់ផ្នែករូបភាពសំខាន់ (ទំហំណែនាំ៖ 1920x1080px)",
+    "heroImageDescription": "រូបភាពនេះនឹងបង្ហាញនៅផ្នែកខាងលើបំផុតនៃទំព័រដើមរបស់ក្រុមហ៊ុនអ្នក។ សូមប្រើរូបភាពដែលមានគុណភាពខ្ពស់ និងទាក់ទាញដែលតំណាងឱ្យក្រុមហ៊ុនរបស់អ្នក។",
+    "companyName": "ឈ្មោះក្រុមហ៊ុន",
+    "companyNamePlaceholder": "បញ្ចូលឈ្មោះក្រុមហ៊ុន",
+    "companyNameTooltip": "បញ្ចូលឈ្មោះផ្លូវការរបស់ក្រុមហ៊ុនអ្នក",
+    "editTitle": "កែប្រែក្រុមហ៊ុន",
+    "backToCompanies": "← ត្រឡប់ទៅក្រុមហ៊ុន",
+    "companyNameRequired": "ត្រូវការឈ្មោះក្រុមហ៊ុន",
+    "updateCompany": "ធ្វើបច្ចុប្បន្នភាពក្រុមហ៊ុន",
+    "updating": "កំពុងធ្វើបច្ចុប្បន្នភាព...",
+    "cancel": "បោះបង់",
+    "privacyPolicyPlaceholder": "បញ្ចូលគោលការណ៍ភាពឯកជនរបស់អ្នកនៅទីនេះ...",
+    "sections": {
+      "logo": "ឡូហ្គោក្រុមហ៊ុន",
+      "basicInfo": "ព័ត៌មានមូលដ្ឋាន",
+      "contactInfo": "ព័ត៌មានទំនាក់ទំនង",
+      "socialMedia": "បណ្ដាញសង្គម",
+      "paymentGateway": "ច្រកទូទាត់ប្រាក់",
+      "privacyPolicy": "គោលការណ៍ភាពឯកជន",
+      "termsAndConditions": "លក្ខខណ្ឌ"
+    },
+    "paymentGateway": {
+      "title": "ច្រកទូទាត់ប្រាក់",
+      "link": "តំណភ្ជាប់ច្រកទូទាត់ប្រាក់",
+      "linkPlaceholder": "https://payment-gateway.com/your-account",
+      "qrCode": "កូដ QR ទូទាត់ប្រាក់",
+      "qrDescription": "ផ្ទុកឡើងរូបភាពកូដ QR សម្រាប់ការទូទាត់"
+    },
+    "errors": {
+      "fetchFailed": "មិនអាចទាញយកព័ត៌មានក្រុមហ៊ុនបានទេ",
+      "updateFailed": "មិនអាចធ្វើបច្ចុប្បន្នភាពក្រុមហ៊ុនបានទេ"
+    },
+    "tabs": {
+      "faq": "សំណួរដែលគេសួរញឹកញាប់"
+    },
+    "faqs": {
+      "add": "បន្ថែមសំណួរ",
+      "addFirstFaq": "បន្ថែមសំណួរដំបូង",
+      "question": "សំណួរ",
+      "answer": "ចម្លើយ",
+      "questionPlaceholder": "បញ្ចូលសំណួរ",
+      "answerPlaceholder": "បញ្ចូលចម្លើយ",
+      "noFaqs": "មិនទាន់មានសំណួរដែលគេសួរញឹកញាប់នៅឡើយទេ។"
+    }
+  },
+  "common": {
+    "changeImage": "ផ្លាស់ប្ដូររូបភាព",
+    "removeImage": "លុបរូបភាព",
+    "copy": "ចម្លង",
+    "clickToCopy": "ចុចដើម្បីចម្លង",
+    "copied": "ចម្លងដោយជោគជ័យ",
+    "download": "ទាញយក",
+    "dragAndDrop": "អូសរូបភាពមកទីនេះ ឬ",
+    "browse": "រកមើល",
+    "or": "ឬ",
+    "unauthorized": "អ្នកមិនមានការអនុញ្ញាតចូលទំព័រនេះទេ",
+    "sessionExpired": "ដែនកំណត់ពេលវេលាចូលប្រើប្រាស់របស់អ្នកហួសហេតុ។ សូមចូលម្តងទៀត។",
+    "authError": "មានកំហុសក្នុងការផ្ទៀងផ្ទាត់។ សូមព្យាយាមម្តងទៀត។",
+    "logout": "ចាកចេញ"
+  },
+  "validation": {
+    "maxLength": "អតិបរមា {{max}} តួអក្សរ"
+  },
+  "imageUpload": {
+    "maxSize": "ទំហំឯកសារអតិបរមា៖ 5MB",
+    "sizeError": "រូបភាពត្រូវតែមានទំហំតិចជាង 5MB",
+    "typeError": "សូមផ្ទុកឡើងឯកសាររូបភាព",
+    "success": "ផ្ទុកឡើងរូបភាពដោយជោគជ័យ",
+    "error": "មានបញ្ហាក្នុងការផ្ទុកឡើងរូបភាព",
+    "removingBg": "កំពុងលុបផ្ទៃខាងក្រោយ...",
+    "bgRemoved": "លុបផ្ទៃខាងក្រោយដោយជោគជ័យ",
+    "bgRemoveError": "មិនអាចលុបផ្ទៃខាងក្រោយបានទេ",
+    "removeBg": "លុបផ្ទៃខាងក្រោយ",
+    "uploading": "កំពុងផ្ទុកឡើង...",
+    "removed": "លុបរូបភាពដោយជោគជ័យ"
+  },
+  "profile": {
+    "title": "ប្រវត្តិរូប",
+    "passwordChangedSuccess": "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យ",
+    "passwordChangedError": "បរាជ័យក្នុងការផ្លាស់ប្តូរពាក្យសម្ងាត់",
+    "currentPasswordPlaceholder": "បញ្ចូលពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នក",
+    "newPasswordPlaceholder": "បញ្ចូលពាក្យសម្ងាត់ថ្មីរបស់អ្នក",
+    "confirmPasswordPlaceholder": "បញ្ជាក់ពាក្យសម្ងាត់ថ្មីរបស់អ្នក",
+    "generalInfo": "ព័ត៌មានទូទៅ",
+    "security": "សុវត្ថិភាព",
+    "changePassword": "ប្ដូរពាក្យសម្ងាត់",
+    "currentPassword": "ពាក្យសម្ងាត់បច្ចុប្បន្ន",
+    "newPassword": "ពាក្យសម្ងាត់ថ្មី",
+    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+    "updatePassword": "កែប្រែពាក្យសម្ងាត់",
+    "settings": "ការកំណត់ប្រវត្តិរូប",
+    "viewProfile": "មើលប្រវត្តិរូប",
+    "saving": "កំពុងរក្សាទុក...",
+    "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
+
+      "name": "ឈ្មោះ",
+      "email": "អ៊ីមែល",
+      "enterName": "បញ្ចូលឈ្មោះរបស់អ្នក",
+      "enterEmail": "បញ្ចូលអ៊ីមែលរបស់អ្នក",
+      "updateError": "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូប",
+      "updateSuccess": "ប្រវត្តិរូបត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ",
+      "imageSizeError": "ទំហំឯកសារគួរតិចជាង 5MB",
+      "imageTypeError": "សូមផ្ទុកឡើងឯកសាររូបភាព (JPG, PNG, ឬ GIF)",
+      "imageDimensionError": "រូបភាពត្រូវតែមានទំហំតិចជាង 100x100px",
+      "imageLoadError": "មិនអាចផ្ទុករូបភាពបានទេ។ សូមព្យាយាមឯកសារផ្សេង។",
+      "bgRemoveError": "មិនអាចលុបផ្ទៃខាងក្រោយបានទេ។ សូមព្យាយាមម្ដងទៀត។",
+      "bgRemoveSuccess": "លុបផ្ទៃខាងក្រោយដោយជោគជ័យ!",
+      "bgRemoveLoading": "កំពុងលុបផ្ទៃខាងក្រោយ...",
+      "namePlaceholder": "បញ្ចូលឈ្មោះរបស់អ្នក",
+      "emailPlaceholder": "បញ្ចូលអ៊ីមែលរបស់អ្នក",
+
+
+    "picture": {
+      "upload": "ផ្ទុកឡើងរូបថត",
+      "uploading": "កំពុងផ្ទុកឡើង...",
+      "uploaded": "ផ្ទុកឡើងរូបថតដោយជោគជ័យ!",
+      "removingBg": "កំពុងលុបផ្ទៃខាងក្រោយ...",
+      "bgRemoved": "លុបផ្ទៃខាងក្រោយដោយជោគជ័យ!",
+      "removed": "លុបរូបភាពដោយជោគជ័យ",
+      "remove": "លុបចេញ",
+      "removeBg": "លុបផ្ទៃខាងក្រោយ",
+      "supportedFormats": "JPG, PNG, ឬ GIF",
+      "maxSize": "ទំហំឯកសារអតិបរមា៖ 5MB",
+      "invalidType": "សូមផ្ទុកឡើងឯកសាររូបភាព (JPG, PNG, ឬ GIF)",
+      "sizeLimit": "រូបភាពត្រូវតែមានទំហំតិចជាង 5MB",
+      "dimensionError": "រូបភាពតូចពេក។ ទំហំអប្បបរមា 100x100px",
+      "loadError": "មិនអាចផ្ទុករូបភាពបានទេ។ សូមព្យាយាមឯកសារផ្សេង។",
+      "bgRemoveError": "មិនអាចលុបផ្ទៃខាងក្រោយបានទេ។ សូមព្យាយាមម្ដងទៀត។",
+      "alt": "រូបភាពប្រវត្តិរូប"
+    }
+  },
+  "contactPage": {
+    "title": "ទំនាក់ទំនងពួកយើង",
+    "subtitle": "ទាក់ទងមកកាន់ក្រុមការងាររបស់យើង",
+    "map": {
+      "title": "ទីតាំងរបស់យើង"
+    },
+    "info": {
+      "title": "ព័ត៌មានទំនាក់ទំនង",
+      "address": "១២៣ ផ្លូវឈ្មោះ រាជធានីភ្នំពេញ",
+      "phone": "+៨៥៥ ១២ ៣៤៥ ៦៧៨",
+      "email": "info@khhara.com",
+      "hours": "ច័ន្ទ-សុក្រ: ០៨:០០ - ១៧:០០\nសៅរ៍: ០៩:០០ - ១២:០០\nអាទិត្យ: បិទ",
+      "addressTitle": "អាសយដ្ឋាន",
+      "phoneTitle": "ទូរស័ព្ទ",
+      "emailTitle": "អ៊ីមែល",
+      "hoursTitle": "ម៉ោងធ្វើការ"
+    },
+    "social": {
+      "title": "តាមដានពួកយើង",
+      "subtitle": "តាមដានពួកយើងតាមរយៈ",
+      "facebook": "ទស្សនាទំព័រ Facebook របស់យើង",
+      "instagram": "តាមដានយើងលើ Instagram",
+      "youtube": "មើលយើងលើ YouTube",
+      "linkedin": "តភ្ជាប់ជាមួយយើងលើ LinkedIn"
+    },
+    "form": {
+      "name": "ឈ្មោះរបស់អ្នក",
+      "email": "អ៊ីមែលរបស់អ្នក",
+      "title": "ទំនាក់ទំនង",
+      "subtitle": "អ្នកអាចទំនាក់ទំនងមកយើង",
+      "subject": "ប្រធានបទ",
+      "message": "សាររបស់អ្នក",
+      "submit": "ផ្ញើសារ",
+      "sending": "កំពុងផ្ញើ...",
+      "success": "សាររបស់អ្នកត្រូវបានផ្ញើដោយជោគជ័យ! យើងនឹងទាក់ទងអ្នកវិញឆាប់ៗនេះ។",
+      "error": "មានបញ្ហាក្នុងការផ្ញើសារ។ សូមព្យាយាមម្តងទៀត។",
+      "validation": {
+        "required": "ត្រូវការបំពេញព័ត៌មាន",
+        "email": "សូមបញ្ចូលអ៊ីមែលត្រឹមត្រូវ"
+      }
+    }
+  },
+  "hero": {
+    "title": "សូមស្វាគមន៍មកកាន់ KH HARA",
+    "tagline": "ត្រូវការជំនួយក្នុងក្រុមហ៊ុនរបស់អ្នក?",
+    "subtitle": "យើងនៅទីនេះដើម្បីជួយក្រុមហ៊ុនរបស់អ្នក",
+    "cta": "ចុះឈ្មោះ",
+    "learnMore": "ស្វែងយល់បន្ថែម"
+  },
+  "search": {
+    "title": "ស្វែងរក",
+    "placeholder": "ស្វែងរក...",
+    "results": "លទ្ធផលស្វែងរក",
+    "noResults": "រកមិនឃើញលទ្ធផលទេ",
+    "loading": "កំពុងផ្ទុក...",
+    "error": "មានកំហុសក្នុងការស្វែងរក"
+  },
+  "notifications": {
+    "title": "ការជូនដំណឹង",
+    "none": "មិនមានការជូនដំណឹងថ្មីទេ",
+    "markAllAsRead": "សម្គាល់ថាបានអានទាំងអស់"
+  }
+}
