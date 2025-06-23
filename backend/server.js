@@ -26,9 +26,9 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:5001",
-    "https://crypto-nmz7.onrender.com",
-    "https://khhara.com",
-    "https://www.khhara.com",
+    "https://chhipwong.onrender.com",
+    // "https://khhara.com",
+    // "https://www.khhara.com",
   ],
   credentials: true
 }));
@@ -60,7 +60,7 @@ app.get(/^\/(?!api).*/, (req, res) => {
 
 // Auto-reload ping
 const autoReload = () => {
-  https.get("https://crypto-nmz7.onrender.com/", (res) => {
+  https.get("https://chhipwong.onrender.com/", (res) => {
     console.log(`[${new Date().toISOString()}] 🔄 Auto-reload request sent. Status: ${res.statusCode}`);
   }).on("error", (err) => {
     console.error(`[${new Date().toISOString()}] ❌ Auto-reload failed: ${err.message}`);

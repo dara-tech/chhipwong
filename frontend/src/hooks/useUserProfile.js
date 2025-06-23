@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 
 // Define your API base URL. Ensure this matches your backend configuration.
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "https://crypto-nmz7.onrender.com";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "https://chhipwong.onrender.com";
 
 const API = axios.create({ baseURL: API_URL });
 

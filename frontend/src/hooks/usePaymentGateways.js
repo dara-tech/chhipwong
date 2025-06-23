@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'test') {
 } else {
   API_URL = import.meta.env.MODE === 'development'
     ? 'http://localhost:5001'
-    : 'https://crypto-nmz7.onrender.com';
+    : 'https://chhipwong.onrender.com';
 }
 
 const API = axios.create({ baseURL: API_URL });
