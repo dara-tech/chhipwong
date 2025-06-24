@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SERVER_URL = 'https://crypto-nmz7.onrender.com/health'; // Use explicit health endpoint
+const SERVER_URL = 'https://chhipwong.onrender.com/health'; // Use explicit health endpoint
 const TIMEOUT = 8000; // 8 seconds timeout
 
 /**

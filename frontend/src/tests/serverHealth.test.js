@@ -2,7 +2,7 @@ import https from 'https';
 import { URL } from 'url';
 
 // Configuration
-const SERVER_URL = 'https://crypto-nmz7.onrender.com';
+const SERVER_URL = 'https://chhipwong.onrender.com';
 const TIMEOUT = 10000; // 10 seconds
 
 // Helper function to make HTTPS request
