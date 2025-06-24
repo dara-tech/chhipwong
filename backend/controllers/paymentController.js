@@ -17,7 +17,7 @@ export const getPaymentInfo = async (req, res) => {
       success: true,
       paymentGateway: company.paymentGateway,
       paymentQR: company.paymentQR
-    });
+    }); 
   } catch (error) {
     console.error('Error in getPaymentInfo:', error);
     res.status(500).json({ 
