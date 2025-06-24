@@ -27,8 +27,8 @@ app.use(cors({
     "http://localhost:5173",
     "http://localhost:5001",
     "https://chhipwong.onrender.com",
-    "https://chhimmywong.com",
-    "https://www.chhimmywong.com",
+    "https://www.chimmywonggroup.com",
+    "https://chimmywonggroup.com",
   ],
   credentials: true
 }));
