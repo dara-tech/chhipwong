@@ -1,4 +1,5 @@
 import React, { StrictMode, useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { initI18n } from './i18n';
@@ -128,6 +129,7 @@ const startApp = async () => {
         <BrowserRouter>
           <AuthProvider>
             <FontLoader />
+            <Toaster position="top-center" reverseOrder={false} />
             <App />
           </AuthProvider>
         </BrowserRouter>

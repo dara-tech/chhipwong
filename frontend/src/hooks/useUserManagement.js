@@ -47,7 +47,37 @@ const useUserManagement = () => {
     }
   }, []);
 
-  return { users, loading, error, fetchUsers, deleteUser };
+  const getUserById = useCallback(async (userId) => {
+    setError(null);
+    setLoading(true);
+    try {
+      const { data } = await API.get(`/api/auth/users/${userId}`);
+      return data;
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Error fetching user details';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const updateUserByAdmin = useCallback(async (userId, userData) => {
+    setError(null);
+    setLoading(true);
+    try {
+      const { data } = await API.put(`/api/auth/users/${userId}`, userData);
+      return data;
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Error updating user';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { users, loading, error, fetchUsers, deleteUser, getUserById, updateUserByAdmin };
 };
 
 export default useUserManagement;

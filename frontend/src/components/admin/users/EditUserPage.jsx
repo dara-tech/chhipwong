@@ -1,47 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import useUserManagement from '../../../hooks/useUserManagement';
 import useAuth from '../../../hooks/useAuth';
 import { User, Mail, Shield, Save, XCircle, AlertCircle, Loader } from 'lucide-react';
 import { FaUser, FaEnvelope, FaUserShield, FaUserCog } from 'react-icons/fa';
 
 const EditUserPage = () => {
-  const { userId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { getUserById, updateUserByAdmin, error: authError } = useAuth();
+  const { getUserById, updateUserByAdmin, error: userError, loading } = useUserManagement();
+  const { profile } = useAuth();
+
+  // Debug log for id
+  console.log('EditUserPage id:', id);
+
+  // Guard: If id is undefined, show error and do not fetch
+  const [invalidId, setInvalidId] = useState(false);
+  useEffect(() => {
+    if (!id) {
+      setInvalidId(true);
+    } else {
+      setInvalidId(false);
+    }
+  }, [id]);
 
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', type: '' });
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isEditingSelf, setIsEditingSelf] = useState(false);
+
+  useEffect(() => {
+    if (profile && profile.id === id) {
+      setIsEditingSelf(true);
+    } else {
+      setIsEditingSelf(false);
+    }
+  }, [profile, id]);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      setLoading(true);
+      setError('');
       try {
-        const data = await getUserById(userId);
-        if (data) {
-          setUser(data);
-          setFormData({ name: data.name, email: data.email, type: data.type });
+        const data = await getUserById(id);
+        const userObj = data.user || data;
+        if (userObj) {
+          setUser(userObj);
+          setFormData({ name: userObj.name, email: userObj.email, type: userObj.type });
         } else {
-          setError('Failed to fetch user data.');
+          setError('User not found or failed to fetch data.');
+          setTimeout(() => navigate('/users'), 2000);
         }
       } catch (err) {
-        setError('Failed to fetch user data.');
-      } finally {
-        setLoading(false);
+        setError(err?.message || 'An unexpected error occurred while fetching user data.');
       }
     };
 
-    fetchUserData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (id) {
+      fetchUserData();
+    }
+  }, [id, getUserById, navigate]);
 
   useEffect(() => {
-    if (authError) {
-      setError(authError);
+    if (userError) {
+      setError(userError);
     }
-  }, [authError]);
+  }, [userError]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,24 +73,40 @@ const EditUserPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isEditingSelf) {
+      setError("You cannot edit your own profile from this page.");
+      return;
+    }
     setError('');
     setSuccess('');
-    setLoading(true);
 
     try {
-      const result = await updateUserByAdmin(userId, formData);
-      if (result.user) {
+      const result = await updateUserByAdmin(id, formData);
+      if (result && result.user) {
         setSuccess(result.message || 'User updated successfully!');
         setTimeout(() => navigate('/users'), 2000);
       } else {
-        setError(result.message || 'Failed to update user.');
+        setError(result?.message || 'Failed to update user.');
       }
     } catch (err) {
-      setError(err.message || 'An unexpected error occurred.');
-    } finally {
-      setLoading(false);
+      setError(err?.message || 'An unexpected error occurred.');
     }
   };
+
+  if (invalidId) {
+    return (
+      <div className="container mx-auto p-4 md:p-6 lg:p-8 min-h-screen">
+        <div className="max-w-2xl mx-auto space-y-6 pt-20">
+          <div className="alert alert-error shadow-lg">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-5 h-5" />
+              <span>Invalid user ID. Please return to the user list.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (loading && !user) {
     return (
@@ -161,6 +201,14 @@ const EditUserPage = () => {
                 </div>
               </div>
             )}
+            {isEditingSelf && (
+              <div className="alert alert-warning shadow-lg">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5" />
+                  <span>You cannot edit your own profile here. Please use the account settings page.</span>
+                </div>
+              </div>
+            )}
 
             <div className="form-control">
               <label className="label">
@@ -176,6 +224,7 @@ const EditUserPage = () => {
                 onChange={handleChange}
                 className="input input-bordered w-full focus:border-none focus:ring-0 focus:outline-primary"
                 required
+                disabled={isEditingSelf}
               />
             </div>
 
@@ -193,6 +242,7 @@ const EditUserPage = () => {
                 onChange={handleChange}
                 className="input input-bordered w-full focus:border-none focus:ring-0 focus:outline-primary"
                 required
+                disabled={isEditingSelf}
               />
             </div>
 
@@ -208,6 +258,7 @@ const EditUserPage = () => {
                 value={formData.type}
                 onChange={handleChange}
                 className="select select-bordered w-full focus:border-none focus:ring-0 focus:outline-primary"
+                disabled={isEditingSelf}
               >
                 <option value="user">User</option>
                 <option value="payment_viewer">Payment Viewer</option>
@@ -218,7 +269,7 @@ const EditUserPage = () => {
             <div className="flex justify-end space-x-4 pt-4">
               <button
                 type="button"
-                onClick={() => navigate('/users')}
+                onClick={() => navigate('/admin/users')}
                 className="btn btn-ghost gap-2 hover:bg-base-200 transition-colors duration-200"
               >
                 <XCircle className="w-4 h-4" />
@@ -227,7 +278,7 @@ const EditUserPage = () => {
               <button 
                 type="submit" 
                 className="btn btn-primary gap-2 shadow-lg hover:shadow-primary/20 transition-all duration-300" 
-                disabled={loading}
+                disabled={loading || isEditingSelf}
               >
                 {loading ? (
                   <>

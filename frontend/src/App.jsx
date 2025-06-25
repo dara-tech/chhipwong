@@ -27,6 +27,7 @@ import Navbar from './components/shares/Navbar';
 import Footer from './components/shares/Footer';
 import SuperAdminLayout from './components/admin/layouts/SuperAdminLayout';
 import SuperAdminDashboard from './components/admin/dashboard/SuperAdminDashboard';
+import EditUserPage from './components/admin/users/EditUserPage';
 import { routesMetadata } from './config/metadata';
 import './App.css';
 
@@ -161,15 +162,27 @@ const App = () => {
             />
 
             {/* Protected Routes */}
-            <Route element={<PrivateRoute roles={['super_admin']}><MainLayout /></PrivateRoute>}>
+            <Route element={<PrivateRoute roles={['super_admin', 'admin']}><MainLayout /></PrivateRoute>}>
               <Route path="/dashboard" element={<SuperAdminDashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/payments" element={<PaymentViewerPage />} />
               <Route path="/companies" element={<CompanyList />} />
               <Route path="/companies/:id" element={<CompanyEdit />} />
               <Route path="/users" element={<UserManagementPage />} />
+              <Route path="/users/:id" element={<EditUserPage />} />
               <Route path="/admin/settings" element={<SettingPage />} />
             </Route>
+
+            {/* Payment Viewer Route - accessible to super_admin, admin, and payment_viewer */}
+            <Route path="/payments" element={
+              <PrivateRoute roles={['super_admin', 'admin', 'payment_viewer']}>
+                <PaymentViewerPage />
+              </PrivateRoute>
+            } />
+            {/* Profile Route - accessible to super_admin, admin, and payment_viewer */}
+            <Route path="/profile" element={
+              <PrivateRoute roles={['super_admin', 'admin', 'payment_viewer']}>
+                <Profile />
+              </PrivateRoute>
+            } />
 
             {/* Root Route - Conditional rendering based on authentication */}
             <Route 
