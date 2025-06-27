@@ -13,11 +13,11 @@ const LoadingScreen = () => {
 
   useEffect(() => {
     const loadingSteps = [
-      { progress: 20, text: 'Booting system...' },
-      { progress: 40, text: 'Loading modules...' },
-      { progress: 60, text: 'Verifying integrity...' },
-      { progress: 80, text: 'Finalizing setup...' },
-      { progress: 100, text: 'Launching...' }
+      { progress: 20, text: 'Booting System' },
+      { progress: 40, text: 'Loading Modules' },
+      { progress: 60, text: 'Verifying Integrity' },
+      { progress: 80, text: 'Finalizing Setup' },
+      { progress: 100, text: 'Launching' }
     ];
 
     let currentStep = 0;
@@ -35,52 +35,55 @@ const LoadingScreen = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const circumference = 2 * Math.PI * 46;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
   return (
-    <div className="fixed inset-0 bg-zinc-900 flex items-center justify-center z-50">
-      <div className="w-full max-w-md px-4">
-        {/* Hexagonal Logo */}
-        <div className="text-center mb-8">
-          <div className="w-34 h-34 mx-auto mb-4 relative">
-            <div className="absolute inset-0 bg-zinc-800 clip-hexagon"></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-cyan-500 opacity-20 clip-hexagon"></div>
-            <div className="absolute inset-2 bg-zinc-900 clip-hexagon flex items-center justify-center">
-              <span className="text-2xl font-bold text-emerald-400">
-                KH HARA
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hexagonal Progress Bar */}
-        <div className="relative w-full h-4 mb-4">
-          <div className="absolute inset-0 bg-zinc-800 clip-hexagon"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 opacity-20 clip-hexagon"></div>
-          <div 
-            className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 clip-hexagon transition-all duration-500 ease-out"
-            style={{ width: `${progress}%` }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-          </div>
-        </div>
-
-        {/* Loading Text */}
-        <div className="text-center">
-          <p className="text-emerald-400 font-mono mb-2">{loadingText}</p>
-          <p className="text-sm text-cyan-400/70 font-mono">{progress}%</p>
-        </div>
-
-        {/* Hexagonal Dots */}
-        <div className="flex justify-center mt-6 space-x-4">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="w-3 h-3 bg-emerald-500/50 clip-hexagon"
-              style={{
-                animation: `pulse 1.5s infinite ${i * 0.2}s`,
-                boxShadow: '0 0 10px rgba(16, 185, 129, 0.5)'
-              }}
+    <div className="fixed inset-0 bg-zinc-900 flex items-center justify-center z-50 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-10 animate-pan"></div>
+      <div className="absolute inset-0 bg-gradient-to-radial from-transparent via-zinc-900/50 to-zinc-900"></div>
+      
+      <div className="w-full max-w-md px-4 text-center">
+        <div className="relative w-48 h-48 mx-auto mb-8">
+          <div className="absolute inset-0 border-2 border-cyan-500/20 rounded-full animate-spin-slow"></div>
+          <div className="absolute inset-4 border border-emerald-500/20 rounded-full animate-spin-reverse-slow"></div>
+          
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+            <circle
+              className="text-emerald-500/20"
+              strokeWidth="4"
+              stroke="currentColor"
+              fill="transparent"
+              r="46"
+              cx="50"
+              cy="50"
             />
-          ))}
+            <circle
+              className="text-emerald-400 drop-shadow-glow"
+              strokeWidth="4"
+              strokeLinecap="round"
+              stroke="currentColor"
+              fill="transparent"
+              r="46"
+              cx="50"
+              cy="50"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              style={{ transition: 'stroke-dashoffset 0.5s ease-out' }}
+              transform="rotate(-90 50 50)"
+            />
+          </svg>
+          
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-4xl font-light text-cyan-400 font-mono">{progress}<span className="text-2xl">%</span></span>
+          </div>
+        </div>
+
+        <div>
+          <p className="text-lg text-emerald-400 font-mono tracking-widest uppercase mb-3 animate-pulse">
+            {loadingText}
+          </p>
+          <div className="w-32 h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/70 to-emerald-500/0 mx-auto"></div>
         </div>
       </div>
     </div>
@@ -162,14 +165,40 @@ const startApp = async () => {
 // Add keyframes for animations
 const style = document.createElement('style');
 style.textContent = `
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.2); opacity: 1; }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
   
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+  @keyframes pan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  .bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  .animate-spin-reverse-slow {
+    animation: spin-slow 15s linear infinite reverse;
+  }
+  
+  .animate-pan {
+    animation: pan 30s linear infinite;
+  }
+
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+
+  .bg-gradient-to-radial {
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
   }
   
   .clip-hexagon {

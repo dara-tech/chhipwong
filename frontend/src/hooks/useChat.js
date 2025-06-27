@@ -110,9 +110,17 @@ const useChat = () => {
     setError(null);
     abortControllerRef.current = new AbortController();
 
+    if (!genAI) {
+      console.error("Gemini AI not initialized. Check API key.");
+      setError('Chat service is not configured correctly.');
+      updateMessage(botMessage.id, { status: 'error', text: 'Chat service is not configured. Please check the API key.' });
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const model = genAI.getGenerativeModel({ 
-        model: 'gemini-2.0-flash',
+        model: 'gemini-1.5-flash',
         generationConfig: {
           maxOutputTokens: 1000,
           temperature: 0.7,
