@@ -5,17 +5,31 @@ import { UAParser } from 'ua-parser-js';
 import Viewer from '../models/Viewer.js';
 
 export const trackVisit = async (req, res, next) => {
-    const referrer = req.headers['referer'] || '';
-    const isFrontendVisit =
-        referrer.includes('localhost:5173') ||
-        referrer.includes('khhara.com') ||
-        referrer.includes('www.khhara.com') ||
-        referrer.includes('crypto-nmz7.onrender.com');
+    const referrer = req.headers['referer'];
+    // Using a clear list of allowed hostnames for a more secure and precise check.
+    const allowedHostnames = [
+        'localhost:5173',
+        'www.chimmywonggroup.com',
+        'chimmywonggroup.com',
+        'chhipwong.onrender.com' // Restored for compatibility with Render deployment
+    ];
 
-    // referrer.includes('daracheol.com')
+    let isAllowed = false;
+    if (referrer) {
+        try {
+            // Parsing the referrer URL to safely get the host (hostname + port).
+            const referrerHost = new URL(referrer).host;
+            isAllowed = allowedHostnames.includes(referrerHost);
+        } catch (error) {
+            // Silently ignore invalid Referer headers.
+            isAllowed = false;
+        }
+    }
+
     const isAssetRequest = req.path.match(/\.(js|css|png|jpg|jpeg|svg|ico|woff|ttf|map)$/i);
 
-    if (!isFrontendVisit || req.path === '/favicon.ico' || isAssetRequest) {
+    // Proceed only if the referrer is in the allowlist and it's not a request for a static asset.
+    if (!isAllowed || req.path === '/favicon.ico' || isAssetRequest) {
         return next();
     }
 
@@ -99,10 +113,11 @@ function getCountryFlag(countryCode) {
 }
 
 function getDeviceInfo(device) {
-    if (device.type) {
-        return `${device.type} ${device.vendor || ''} ${device.model || ''}`.trim();
-    }
-    return 'Desktop/Laptop';
+    // Robustly build the device info string, filtering out any empty parts.
+    const info = [device.type, device.vendor, device.model]
+        .filter(Boolean)
+        .join(' ');
+    return info || 'Desktop/Laptop'; // Fallback if no device info is found.
 }
 
 function escapeMarkdown(text) {

@@ -9,7 +9,7 @@ import authRoutes from './routes/authRoutes.js';
 import companyRoute from './routes/companyRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import viewerRoutes from './routes/viewerRoutes.js';
-// import {trackVisit} from './middleware/visitTracker.js';
+import {trackVisit} from './middleware/visitTracker.js';
 
 dotenv.config();
 
@@ -34,7 +34,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-// app.use(trackVisit);
+app.use(trackVisit);
 
 // Logging middleware
 app.use((req, res, next) => {
