@@ -1,94 +1,14 @@
 import React, { StrictMode, useEffect, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { initI18n } from './i18n';
 import './index.css';
 import App from './App.jsx';
+import LoadingScreen from './components/shares/LoadingScreen.jsx';
 import { AuthProvider } from './context/AuthProvider';
 
-const LoadingScreen = () => {
-  const [progress, setProgress] = useState(0);
-  const [loadingText, setLoadingText] = useState('Initializing...');
 
-  useEffect(() => {
-    const loadingSteps = [
-      { progress: 20, text: 'Booting System' },
-      { progress: 40, text: 'Loading Modules' },
-      { progress: 60, text: 'Verifying Integrity' },
-      { progress: 80, text: 'Finalizing Setup' },
-      { progress: 100, text: 'Launching' }
-    ];
-
-    let currentStep = 0;
-    const interval = setInterval(() => {
-      if (currentStep < loadingSteps.length) {
-        const { progress, text } = loadingSteps[currentStep];
-        setProgress(progress);
-        setLoadingText(text);
-        currentStep++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 800);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const circumference = 2 * Math.PI * 46;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
-
-  return (
-    <div className="fixed inset-0 bg-zinc-900 flex items-center justify-center z-50 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 animate-pan"></div>
-      <div className="absolute inset-0 bg-gradient-to-radial from-transparent via-zinc-900/50 to-zinc-900"></div>
-      
-      <div className="w-full max-w-md px-4 text-center">
-        <div className="relative w-48 h-48 mx-auto mb-8">
-          <div className="absolute inset-0 border-2 border-cyan-500/20 rounded-full animate-spin-slow"></div>
-          <div className="absolute inset-4 border border-emerald-500/20 rounded-full animate-spin-reverse-slow"></div>
-          
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-            <circle
-              className="text-emerald-500/20"
-              strokeWidth="4"
-              stroke="currentColor"
-              fill="transparent"
-              r="46"
-              cx="50"
-              cy="50"
-            />
-            <circle
-              className="text-emerald-400 drop-shadow-glow"
-              strokeWidth="4"
-              strokeLinecap="round"
-              stroke="currentColor"
-              fill="transparent"
-              r="46"
-              cx="50"
-              cy="50"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-              style={{ transition: 'stroke-dashoffset 0.5s ease-out' }}
-              transform="rotate(-90 50 50)"
-            />
-          </svg>
-          
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-4xl font-light text-cyan-400 font-mono">{progress}<span className="text-2xl">%</span></span>
-          </div>
-        </div>
-
-        <div>
-          <p className="text-lg text-emerald-400 font-mono tracking-widest uppercase mb-3 animate-pulse">
-            {loadingText}
-          </p>
-          <div className="w-32 h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/70 to-emerald-500/0 mx-auto"></div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const FontLoader = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -132,7 +52,6 @@ const startApp = async () => {
         <BrowserRouter>
           <AuthProvider>
             <FontLoader />
-            <Toaster position="top-center" reverseOrder={false} />
             <App />
           </AuthProvider>
         </BrowserRouter>

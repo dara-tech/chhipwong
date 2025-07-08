@@ -2,7 +2,7 @@ import { useEffect, memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaLink, FaSignOutAlt, FaDownload, FaCopy, FaQrcode } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-hot-toast';
+
 import usePaymentGateways from '../hooks/usePaymentGateways';
 
 // Memoized Loading Skeleton Component
@@ -171,7 +171,6 @@ const PaymentViewerPage = () => {
   const handleCopyLink = () => {
     if (paymentInfo?.paymentGateway) {
       navigator.clipboard.writeText(paymentInfo.paymentGateway);
-      toast.success(t('company.paymentGateway.linkCopied', 'Payment link copied!'));
     }
   };
 

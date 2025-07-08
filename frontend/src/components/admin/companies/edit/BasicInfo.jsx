@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IoInformationCircle } from 'react-icons/io5';
-import { toast } from 'react-hot-toast';
+
 import { useTranslation } from 'react-i18next';
 import ImageUpload from './ImageUpload';
 import HeroImageUpload from './HeroImageUpload';
@@ -33,7 +33,6 @@ const BasicInfo = ({ formData, onInputChange, onImageChange, imagePreview }) => 
     };
 
     if (maxLengths[name] && !validateTextLength(value, maxLengths[name])) {
-      toast.error(t('validation.maxLength', { max: maxLengths[name] }));
       return;
     }
 

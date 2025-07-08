@@ -30,6 +30,7 @@ import SuperAdminDashboard from './components/admin/dashboard/SuperAdminDashboar
 import EditUserPage from './components/admin/users/EditUserPage';
 import { routesMetadata } from './config/metadata';
 import './App.css';
+import LoadingScreen from './components/shares/LoadingScreen';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,7 +46,7 @@ const PrivateRoute = ({ children, roles }) => {
   const { profile, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   if (!profile) {
@@ -63,6 +64,7 @@ const App = () => {
   const { isAuthenticated, profile } = useAuth();
   const { theme } = useThemeStore();
   const isSuperAdmin = profile?.type === 'super_admin';
+  const isAdmin = profile?.type === 'admin';
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -218,7 +220,7 @@ const App = () => {
             />
           </Routes>
           {/* Only show Footer if not super admin */}
-          {!isSuperAdmin && <Footer />}
+          {!isSuperAdmin && !isAdmin && <Footer />}
           <Chatbot />
         </div>
       </AuthProvider>

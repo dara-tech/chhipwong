@@ -9,7 +9,7 @@ import {
   FaImage,
 } from 'react-icons/fa';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+
 
 // Initial state for the reducer
 const initialState = {
@@ -61,11 +61,9 @@ const HeroImageUpload = ({ currentImage, onImageChange }) => {
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      toast.error(t('imageUpload.typeError'));
       return;
     }
     if (file.size > 10 * 1024 * 1024) { // 10MB limit
-      toast.error(t('imageUpload.sizeError'));
       return;
     }
     
@@ -77,7 +75,6 @@ const HeroImageUpload = ({ currentImage, onImageChange }) => {
     const previewUrl = URL.createObjectURL(file);
     dispatch({ type: 'PROCESS_SUCCESS', payload: { file, previewUrl } });
     onImageChange(file);
-    toast.success(t('imageUpload.uploadSuccess'));
   }, [onImageChange, t, state.previewUrl]);
 
   // Memoized callback for removing the background
@@ -106,12 +103,10 @@ const HeroImageUpload = ({ currentImage, onImageChange }) => {
       // Update state with the new image
       dispatch({ type: 'PROCESS_SUCCESS', payload: { file: newFile, previewUrl: newUrl } });
       onImageChange(newFile);
-      toast.success(t('imageUpload.bgRemoved'));
     } catch (error) {
       console.error(error);
       const errorMessage = t('imageUpload.bgRemoveError');
       dispatch({ type: 'PROCESS_ERROR', payload: errorMessage });
-      toast.error(errorMessage);
     }
   }, [state.file, onImageChange, t]);
 

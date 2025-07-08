@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaCamera, FaInfoCircle, FaTimes, FaUpload } from 'react-icons/fa';
-import { toast } from 'react-hot-toast';
+
 
 const ImageUpload = ({ 
   field, 
@@ -24,13 +24,11 @@ const ImageUpload = ({
 
     // Validate file size (5MB limit)
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
       return;
     }
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      toast.error('Please upload an image file');
       return;
     }
 
@@ -47,12 +45,10 @@ const ImageUpload = ({
       // Only call onImageChange if it exists
       if (typeof onImageChange === 'function') {
         await onImageChange(field, file);
-        toast.success('Image uploaded successfully');
       }
     } catch (error) {
       // Reset preview image on error
       setPreviewImage(currentImage);
-      toast.error('Failed to upload image');
       console.error('Image upload error:', error);
     } finally {
       setIsUploading(false);
