@@ -281,7 +281,7 @@ const getKrakenInterval = (binanceInterval) => {
 
 const KRAKEN_API = {
   // Use Vite proxy in dev to avoid CORS.
-  BASE_URL: '/kraken',
+  BASE_URL: 'https://api.kraken.com/0/public',
   WS_URL: 'wss://ws.kraken.com',
   
   // Market data endpoints
