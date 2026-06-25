@@ -104,10 +104,10 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           {/* Left side: Hero Content */}
-          <div className="relative z-10 space-y-6 sm:space-y-8 pt-20">
+          <div className="relative z-10 space-y-4 sm:space-y-6 pt-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -125,9 +125,9 @@ const HeroSection = () => {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-base-content leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-base-content leading-tight tracking-tight">
                 {company?.name || t('hero.title')}
-                <span className="text-primary block mt-1 sm:mt-2"> Your Trusted escrow service</span>
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent block mt-2">Your Trusted escrow service</span>
               </h1>
 
               <p className="text-base sm:text-lg text-base-content/70 max-w-lg">
@@ -140,7 +140,7 @@ const HeroSection = () => {
               {/* Live Market Stats */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4">
                 {!isLoading && btcData && (
-                  <div className="card bg-base-100 shadow-sm hover:shadow-md transition-all">
+                  <div className="bg-base-100/80 backdrop-blur-md border border-base-content/10 hover:border-primary/30 transition-all duration-300 rounded-xl overflow-hidden">
                     <div className="card-body p-3 sm:p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ const HeroSection = () => {
                 )}
 
                 {!isLoading && ethData && (
-                  <div className="card bg-base-100 shadow-sm hover:shadow-md transition-all">
+                  <div className="bg-base-100/80 backdrop-blur-md border border-base-content/10 hover:border-primary/30 transition-all duration-300 rounded-xl overflow-hidden">
                     <div className="card-body p-3 sm:p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -176,17 +176,17 @@ const HeroSection = () => {
                 )}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6">
                 <Link
                   to="/register"
-                  className="btn btn-primary btn-lg gap-2 w-full sm:w-auto"
+                  className="btn btn-primary btn-lg gap-2 w-full sm:w-auto rounded-full hover:-translate-y-1 transition-transform duration-300"
                 >
                   Start Trading
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link
                   to="/about"
-                  className="btn btn-outline btn-lg w-full sm:w-auto"
+                  className="btn btn-outline btn-lg w-full sm:w-auto rounded-full hover:-translate-y-1 transition-transform duration-300 border-base-content/20 hover:bg-base-content/5 hover:border-base-content/40 text-base-content"
                 >
                   Learn More
                 </Link>
@@ -203,18 +203,18 @@ const HeroSection = () => {
               className="relative z-10"
             >
               {overallLoading ? (
-                <div className="w-full h-48 sm:h-64 bg-base-300 rounded-lg"></div>
+                <div className="w-full h-48 sm:h-72 bg-base-300 rounded-2xl animate-pulse"></div>
               ) : (
                 <div className="relative">
                   <motion.img
                     src={company?.heroImage || '/images/hero-placeholder.jpg'}
                     alt={company?.name || 'Company Hero'}
-                    className="w-full h-auto max-w-lg mx-auto rounded-full bg-primary/70 shadow-xl"
+                    className="w-full h-auto max-w-lg mx-auto rounded-2xl object-cover border border-base-content/10 bg-base-200/50"
                   />
                   
                   {/* Chart Preview Overlay */}
-                  <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 w-48 sm:w-64">
-                    <div className="card bg-base-100/95 backdrop-blur shadow-xl">
+                  <div className="absolute -bottom-4 right-0 sm:-bottom-8 sm:-right-8 w-[90%] sm:w-64 translate-x-[5%] sm:translate-x-0">
+                    <div className="bg-base-100/90 backdrop-blur-xl border border-base-content/10 rounded-xl hover:border-primary/30 transition-all duration-300 shadow-lg">
                       <div className="card-body p-3 sm:p-4">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">

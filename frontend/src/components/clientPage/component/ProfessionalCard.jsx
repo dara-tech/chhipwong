@@ -8,78 +8,82 @@ const ProfessionalCard = ({ professional }) => {
 
   return (
     <motion.div 
-      className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out h-full flex flex-col overflow-hidden group"
-      whileHover={{ y: -5 }}
+      className="bg-base-100 border border-base-content/10 rounded-3xl transition-all duration-300 ease-in-out h-full flex flex-col overflow-hidden group hover:border-primary/30"
+      whileHover={{ y: -4 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
       <div className="relative">
-        <div className="bg-gradient-to-r from-primary/20 to-secondary/20 h-24 transition-all duration-300 group-hover:h-32"></div>
+        {/* Soft, premium gradient header */}
+        <div className="bg-gradient-to-br from-primary/10 via-base-200 to-secondary/10 h-28 transition-all duration-500 group-hover:h-32"></div>
+        
         <motion.figure 
-          className="px-10 -mt-12 relative z-10 "
-          animate={{ scale: isHovered ? 1.05 : 1 }}
-          transition={{ duration: 0.3 }}
+          className="px-8 -mt-14 relative z-10 flex justify-center"
+          animate={{ scale: isHovered ? 1.02 : 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           {image ? (
             <img 
               src={image} 
               alt={`Photo of ${name}`} 
-              className="rounded-full w-32 h-32 object-cover border-4 border-white shadow-lg transition-all duration-300 group-hover:border-primary/50" 
+              className="rounded-full w-28 h-28 object-cover ring-4 ring-base-100 transition-all duration-300 group-hover:ring-primary/20" 
             />
           ) : (
-            <div className="rounded-full w-32 h-32 bg-base-200 flex items-center justify-center border-4 border-white shadow-lg transition-all duration-300 group-hover:border-primary/50">
-              <FaUserCircle className="text-6xl text-base-content/30" />
+            <div className="rounded-full w-28 h-28 bg-base-200 flex items-center justify-center ring-4 ring-base-100 transition-all duration-300 group-hover:ring-primary/20">
+              <FaUserCircle className="text-6xl text-base-content/20" />
             </div>
           )}
         </motion.figure>
       </div>
 
-      <div className="card-body items-center text-center flex-grow p-6">
+      <div className="flex flex-col flex-grow p-8 pt-4 items-center text-center">
         <motion.h2 
-          className="card-title text-base-content font-bold text-xl"
+          className="text-base-content font-bold text-xl tracking-tight"
           animate={{ y: isHovered ? -2 : 0 }}
+          transition={{ duration: 0.3 }}
         >
           {name}
         </motion.h2>
         
-        <div className="flex flex-col items-center gap-2 mb-2">
-          <div className="badge badge-primary badge-lg text-xs">{role}</div>
+        <div className="flex flex-col items-center gap-3 mt-2 mb-4">
+          <span className="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide">
+            {role}
+          </span>
           {companyName && (
-            <div className="flex items-center gap-1 text-xs text-base-content/70">
-              <FaBuilding className="text-primary" />
+            <div className="flex items-center gap-1.5 text-xs font-medium text-base-content/60">
+              <FaBuilding className="text-base-content/40" />
               <span>{companyName}</span>
             </div>
           )}
         </div>
-
-        <div className="divider my-2"></div>
         
         <motion.p 
-          className="text-base-content/80 text-xs flex-grow"
-          animate={{ opacity: isHovered ? 1 : 0.8 }}
+          className="text-base-content/70 text-sm leading-relaxed flex-grow mt-2"
+          animate={{ opacity: isHovered ? 1 : 0.85 }}
+          transition={{ duration: 0.3 }}
         >
           {description}
         </motion.p>
 
-        <div className="card-actions justify-center mt-4 w-full flex flex-col gap-2">
+        <div className="mt-6 w-full flex flex-col gap-3">
           {email && (
             <motion.a 
               href={`mailto:${email}`}
-              className="btn btn-primary btn-sm gap-2 w-full"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn btn-primary rounded-full btn-sm gap-2 w-full font-medium"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <FaEnvelope /> <span>Contact</span>
+              <FaEnvelope className="opacity-80" /> <span>Contact</span>
             </motion.a>
           )}
           {phone && (
             <motion.a
               href={`tel:${phone}`}
-              className="btn btn-outline btn-primary btn-sm gap-2 w-full"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn btn-outline border-base-content/20 text-base-content hover:bg-base-content/5 hover:border-base-content/30 rounded-full btn-sm gap-2 w-full font-medium transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <FaPhone /> <span>{phone}</span>
+              <FaPhone className="opacity-70" /> <span>{phone}</span>
             </motion.a>
           )}
         </div>

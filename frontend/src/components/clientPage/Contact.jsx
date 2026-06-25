@@ -127,12 +127,12 @@ const Contact = () => {
             <div className="h-6 w-1/2 mx-auto bg-base-300 rounded-lg mt-4"></div>
           </div>
 
-          <div className="mb-12 rounded-xl overflow-hidden shadow-xl">
+          <div className="mb-12 rounded-3xl overflow-hidden border border-base-content/10">
             <div className="aspect-w-16 aspect-h-9 w-full h-96 md:h-[500px] bg-base-300"></div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="bg-base-100 p-8 rounded-xl shadow-lg">
+              <div className="bg-base-100 p-8 rounded-3xl border border-base-content/10">
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
@@ -157,7 +157,7 @@ const Contact = () => {
             </div>
 
             <div className="space-y-8">
-              <div className="bg-base-100 p-8 rounded-xl shadow-lg">
+                <div className="bg-base-100 p-8 rounded-3xl border border-base-content/10">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-base-300 rounded-full"></div>
                   <div className="h-8 w-48 bg-base-300 rounded-lg ml-4"></div>
@@ -175,7 +175,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="bg-base-100 p-8 rounded-xl shadow-lg">
+                <div className="bg-base-100 p-8 rounded-3xl border border-base-content/10">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-base-300 rounded-full"></div>
                   <div className="h-8 w-48 bg-base-300 rounded-lg ml-4"></div>
@@ -196,7 +196,7 @@ const Contact = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-base-200/50 to-base-100 flex flex-col justify-center items-center px-4">
-        <div className="bg-base-200/50 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center">
+        <div className="bg-base-200/50 backdrop-blur-sm p-8 rounded-3xl border border-base-content/10 text-center">
           <FaExclamationTriangle className="text-error text-5xl mx-auto mb-6" />
           <p className="text-xl text-error">{error}</p>
         </div>
@@ -232,8 +232,8 @@ const Contact = () => {
         </div>
 
         {/* Map Section */}
-        <div className="mb-12 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-          <div className="aspect-w-16 aspect-h-9 w-full h-96 md:h-[500px]">
+        <div className="mb-8 rounded-2xl overflow-hidden border border-base-content/10 hover:border-primary/30 transition-colors duration-300">
+          <div className="aspect-w-16 aspect-h-9 w-full h-72 md:h-[400px]">
             <iframe
               title={t('contactPage.map.title')}
               src={mapUrl}
@@ -248,9 +248,9 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}
-          <div className="bg-base-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-base-100 p-6 sm:p-8 rounded-2xl border border-base-content/10 hover:border-primary/30 transition-colors duration-300">
             {submitStatus.message && (
               <div className={`alert ${submitStatus.success ? 'alert-success' : 'alert-error'} mb-6`}>
                 {submitStatus.success ? (
@@ -327,18 +327,18 @@ const Contact = () => {
               </div>
 
               <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-medium">{t('contactPage.form.message')}</span>
+                <label className="label py-1">
+                  <span className="label-text text-sm font-medium">{t('contactPage.form.message')}</span>
                 </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={`textarea textarea-bordered w-full h-40 transition-all duration-200 ${formErrors.message ? 'textarea-error' : 'hover:border-primary focus:border-primary'}`}
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={`textarea textarea-bordered w-full h-32 transition-all duration-200 ${formErrors.message ? 'textarea-error' : 'hover:border-primary focus:border-primary'}`}
                   placeholder={t('contactPage.form.message')}
                 ></textarea>
                 {formErrors.message && (
-                  <label className="label">
+                  <label className="label py-1">
                     <span className="label-text-alt text-error">{formErrors.message}</span>
                   </label>
                 )}
@@ -368,7 +368,7 @@ const Contact = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-base-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-base-100 p-6 sm:p-8 rounded-2xl border border-base-content/10 hover:border-primary/30 transition-colors duration-300">
               <div className="flex items-center mb-6">
                 <div className="p-3 bg-primary/10 rounded-full mr-4">
                   <FaBuilding className="text-primary text-2xl" />
@@ -380,7 +380,7 @@ const Contact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Left Column */}
                 <div className="space-y-6">
-                  <div className="flex items-start space-x-4 p-4 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
+                  <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
                     <div className="p-2 bg-primary/10 rounded-full flex-shrink-0">
                       <FaMapMarkerAlt className="text-primary text-xl" />
                     </div>
@@ -392,7 +392,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4 p-4 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
+                  <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
                     <div className="p-2 bg-primary/10 rounded-full flex-shrink-0">
                       <FaPhoneAlt className="text-primary text-xl" />
                     </div>
@@ -409,8 +409,8 @@ const Contact = () => {
                 </div>
 
                 {/* Right Column */}
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4 p-4 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
                     <div className="p-2 bg-primary/10 rounded-full flex-shrink-0">
                       <FaEnvelope className="text-primary text-xl" />
                     </div>
@@ -425,7 +425,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4 p-4 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
+                  <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-base-200/50 transition-all duration-200 hover:scale-[1.02]">
                     <div className="p-2 bg-primary/10 rounded-full flex-shrink-0">
                       <FaClock className="text-primary text-xl" />
                     </div>
@@ -441,7 +441,7 @@ const Contact = () => {
             </div>
 
             {/* Social Media Section */}
-            <div className="bg-base-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-base-100 p-6 sm:p-8 rounded-2xl border border-base-content/10 hover:border-primary/30 transition-colors duration-300">
               <div className="flex items-center mb-6">
                 <div className="p-3 bg-primary/10 rounded-full mr-4">
                   <FaGlobe className="text-primary text-2xl" />

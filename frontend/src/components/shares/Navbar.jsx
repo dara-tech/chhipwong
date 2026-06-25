@@ -194,8 +194,8 @@ const Navbar = () => {
 
   const activeLinks = profile ? linksForAuthenticatedUser : publicLinks
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 ${
-      isScrolled ? 'bg-base-100/80 backdrop-blur-xl shadow-lg border-b border-base-300/20' : 'bg-transparent'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-base-100/60 backdrop-blur-2xl border-b border-base-content/10 py-1' : 'bg-transparent py-2'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
@@ -255,8 +255,8 @@ const Navbar = () => {
                       <FaChevronDown className={`w-3 h-3 ${isAboutSubMenuOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {isAboutSubMenuOpen && (
-                      <div className="absolute left-0 mt-2 w-64 rounded-2xl shadow-xl bg-base-100/95 backdrop-blur-xl border border-base-300/20 z-50">
-                        <div className="py-2">
+                      <div className="absolute left-0 mt-2 w-56 rounded-2xl bg-base-100/80 backdrop-blur-2xl border border-base-content/10 z-50 overflow-hidden">
+                        <div className="py-1">
                           {link.subMenu.map(subLink => {
                             const isSubActive = location.pathname.startsWith(subLink.to);
                             return (
@@ -264,13 +264,13 @@ const Navbar = () => {
                                 key={subLink.to}
                                 to={subLink.to}
                                 onClick={() => setIsAboutSubMenuOpen(false)}
-                                className={`flex items-center gap-3 px-5 py-3 text-sm ${
+                                className={`flex items-center gap-3 px-4 py-2.5 text-sm ${
                                   isSubActive 
                                     ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary' 
                                     : 'text-base-content/80 hover:bg-base-200/80'
                                 }`}
                               >
-                                <span className="text-lg">{isSubActive ? subLink.activeIcon : subLink.icon}</span>
+                                <span className="text-base">{isSubActive ? subLink.activeIcon : subLink.icon}</span>
                                 {subLink.label}
                               </Link>
                             );
@@ -348,11 +348,11 @@ const Navbar = () => {
 
                 {/* Profile Dropdown */}
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-80 rounded-2xl shadow-xl bg-base-100/95 backdrop-blur-xl border border-base-300/20 z-50">
-                    <div className="p-5 border-b border-base-300/20">
-                      <div className="flex items-center space-x-4">
+                  <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-base-100/80 backdrop-blur-2xl border border-base-content/10 z-50 overflow-hidden shadow-xl">
+                    <div className="p-4 border-b border-base-content/10">
+                      <div className="flex items-center space-x-3">
                         <div className="relative">
-                          <div className="w-14 h-14 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary p-[2px] shadow-lg">
+                          <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary p-[2px] shadow-sm">
                             <div className="w-full h-full rounded-full overflow-hidden bg-base-100">
                               {profile.profilePic ? (
                                 <img
@@ -385,15 +385,15 @@ const Navbar = () => {
                       </div>
                     </div>
                     
-                    <div className="py-2">
+                    <div className="py-1">
                       {(userRole === 'super_admin') && (
                         <Link
                           to="/dashboard"
                           onClick={() => setIsProfileMenuOpen(false)}
-                          className="flex items-center px-5 py-3 text-sm text-base-content/70 hover:bg-base-200/80"
+                          className="flex items-center px-4 py-2.5 text-sm text-base-content/70 hover:bg-base-200/80"
                         >
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mr-3 shadow-sm">
-                            <HiOutlineCog className="w-5 h-5 text-primary" />
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mr-3 shadow-sm">
+                            <HiOutlineCog className="w-4 h-4 text-primary" />
                           </div>
                           <span>{t('menu.admin') || 'Admin Panel'}</span>
                         </Link>
@@ -402,10 +402,10 @@ const Navbar = () => {
                         <Link
                           to="/setting"
                           onClick={() => setIsProfileMenuOpen(false)}
-                          className="flex items-center px-5 py-3 text-sm text-base-content/70 hover:bg-base-200/80"
+                          className="flex items-center px-4 py-2.5 text-sm text-base-content/70 hover:bg-base-200/80"
                         >
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mr-3 shadow-sm">
-                            <HiOutlineCog className="w-5 h-5 text-primary" />
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mr-3 shadow-sm">
+                            <HiOutlineCog className="w-4 h-4 text-primary" />
                           </div>
                           <span>{t('admin.settings') || 'Admin Settings'}</span>
                         </Link>
@@ -413,20 +413,20 @@ const Navbar = () => {
                       <Link
                         to="/profile"
                         onClick={() => setIsProfileMenuOpen(false)}
-                        className="flex items-center px-5 py-3 text-sm text-base-content/70 hover:bg-base-200/80"
+                        className="flex items-center px-4 py-2.5 text-sm text-base-content/70 hover:bg-base-200/80"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mr-3 shadow-sm">
-                          <HiOutlineUser className="w-5 h-5 text-primary" />
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center mr-3 shadow-sm">
+                          <HiOutlineUser className="w-4 h-4 text-primary" />
                         </div>
                         <span>{t('profile.settings') || 'Profile Settings'}</span>
                       </Link>
                       <div className="border-t border-base-300/20 my-2"></div>
                       <button
                         onClick={handleLogout}
-                        className="flex items-center w-full px-5 py-3 text-sm text-error hover:bg-error/10"
+                        className="flex items-center w-full px-4 py-2.5 text-sm text-error hover:bg-error/10"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center mr-3 shadow-sm">
-                          <HiOutlineLogout className="w-5 h-5 text-error" />
+                        <div className="w-8 h-8 rounded-lg bg-error/10 flex items-center justify-center mr-3 shadow-sm">
+                          <HiOutlineLogout className="w-4 h-4 text-error" />
                         </div>
                         <span>{t('auth.logout') || 'Logout'}</span>
                       </button>
@@ -471,7 +471,7 @@ const Navbar = () => {
       <div className={`md:hidden fixed inset-0 z-40 ${isMenuOpen ? 'visible' : 'invisible'}`}>
         {/* Backdrop */}
         <div 
-          className={`absolute inset-0 bg-base-200 transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-base-200/60 backdrop-blur-lg transition-opacity duration-300 ${
             isMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={() => setIsMenuOpen(false)}
@@ -479,7 +479,7 @@ const Navbar = () => {
         
         {/* Menu Content */}
         <div 
-          className={` inset-0 w-full bg-base-200 shadow-2xl transition-transform duration-300 ease-in-out ${
+          className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-base-100/90 backdrop-blur-2xl border-l border-base-content/10 transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
           ref={mobileMenuRef}

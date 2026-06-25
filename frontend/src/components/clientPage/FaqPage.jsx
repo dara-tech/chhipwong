@@ -26,14 +26,14 @@ const FaqPage = () => {
       <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-base-300 animate-pulse shadow-lg"></div>
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-base-300 animate-pulse border border-base-content/10"></div>
             <div className="h-10 w-64 mx-auto bg-base-300 animate-pulse rounded-lg"></div>
             <div className="h-6 w-40 mx-auto mt-4 bg-base-300 animate-pulse rounded-lg"></div>
           </div>
 
           <div className="space-y-6">
             {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="border border-base-300 rounded-2xl bg-base-200/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
+              <div key={item} className="border border-base-content/10 rounded-3xl bg-base-200/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-300">
                 <div className="px-8 py-6">
                   <div className="h-8 bg-base-300 animate-pulse rounded-lg w-4/5"></div>
                 </div>
@@ -56,7 +56,7 @@ const FaqPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-base-200/50 backdrop-blur-sm p-8 rounded-2xl shadow-xl"
+          className="bg-base-200/50 backdrop-blur-sm p-8 rounded-3xl border border-base-content/10"
         >
           <h2 className="text-3xl font-bold text-error mb-4">{t('company.errors.fetchFailed')}</h2>
           <p className="text-lg text-base-content/70 max-w-md">{error}</p>
@@ -81,7 +81,7 @@ const FaqPage = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               src={company.logo}
               alt={`${company.name} Logo`}
-              className="w-28 h-28 mx-auto mb-6 rounded-2xl object-cover shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="w-28 h-28 mx-auto mb-6 rounded-full object-cover ring-4 ring-base-100 hover:ring-primary/20 transition-all duration-300"
             />
           )}
           <motion.h1
@@ -113,7 +113,7 @@ const FaqPage = () => {
               >
                 <div
                   className={`group border border-base-300 rounded-2xl bg-base-200/50 backdrop-blur-sm transition-all duration-300 ${
-                    openIndex === index ? 'shadow-xl' : 'shadow-lg hover:shadow-xl'
+                    openIndex === index ? 'border-primary/30' : 'border-base-content/10 hover:border-primary/20'
                   }`}
                 >
                   <button
@@ -152,7 +152,7 @@ const FaqPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-center py-16 bg-base-200/50 backdrop-blur-sm rounded-2xl shadow-lg"
+              className="text-center py-16 bg-base-200/50 backdrop-blur-sm rounded-3xl border border-base-content/10"
             >
               <p className="text-xl text-base-content/70">{t('company.faqs.noFaqs')}</p>
             </motion.div>

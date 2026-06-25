@@ -68,19 +68,19 @@ const ProfessionalPage = () => {
             <div className="h-6 w-1/2 mx-auto bg-base-300 rounded-lg mt-4"></div>
           </div>
 
-          <div className="mb-12 p-6 bg-base-200/50 backdrop-blur-sm rounded-2xl shadow-xl border border-base-300 flex flex-col sm:flex-row gap-4 items-center">
-            <div className="h-12 w-full bg-base-300 rounded-xl"></div>
-            <div className="h-12 w-full sm:w-48 bg-base-300 rounded-xl"></div>
+          <div className="mb-8 p-4 sm:p-6 bg-base-200/50 backdrop-blur-sm rounded-xl border border-base-content/10 flex flex-col sm:flex-row gap-4 items-center">
+            <div className="h-12 w-full bg-base-300 rounded-lg"></div>
+            <div className="h-12 w-full sm:w-48 bg-base-300 rounded-lg"></div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
-                className="bg-base-200/50 backdrop-blur-sm rounded-2xl shadow-xl border border-base-300 overflow-hidden"
+                className="bg-base-200/50 backdrop-blur-sm rounded-xl border border-base-content/10 overflow-hidden"
               >
-                <div className="h-64 bg-base-300"></div>
-                <div className="p-6 space-y-4">
+                <div className="h-56 bg-base-300"></div>
+                <div className="p-4 space-y-3">
                   <div className="h-7 w-3/4 bg-base-300 rounded-lg"></div>
                   <div className="h-5 w-1/2 bg-base-300 rounded-lg"></div>
                   <div className="h-20 w-full bg-base-300 rounded-lg"></div>
@@ -96,7 +96,7 @@ const ProfessionalPage = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 flex flex-col justify-center items-center px-4">
-        <div className="bg-base-200/50 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center max-w-md">
+        <div className="bg-base-200/50 backdrop-blur-sm p-8 rounded-3xl border border-base-content/10 text-center max-w-md">
           <FaExclamationTriangle className="text-error text-5xl mx-auto mb-6" />
           <h2 className="text-2xl font-bold text-error mb-4">Oops!</h2>
           <p className="text-lg text-base-content/70">{error}</p>
@@ -106,11 +106,11 @@ const ProfessionalPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 py-16 px-4 ">
+    <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 py-12 px-4 ">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className="text-center mb-16 pt-14">
-          <div className="inline-block p-3 bg-primary/10 rounded-2xl mb-6 ">
+        <div className="text-center mb-8 pt-6">
+          <div className="inline-block p-2 bg-primary/10 rounded-xl mb-4 ">
             <FaUsers className="text-4xl text-primary" />
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-base-content mb-6">
@@ -122,10 +122,10 @@ const ProfessionalPage = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-base-200/50 backdrop-blur-sm rounded-2xl p-6 border border-base-300">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-primary/10 rounded-xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="bg-base-200/50 backdrop-blur-sm rounded-xl p-4 border border-base-300">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
                 <FaUsers className="text-2xl text-primary" />
               </div>
               <div>
@@ -134,9 +134,9 @@ const ProfessionalPage = () => {
               </div>
             </div>
           </div>
-          <div className="bg-base-200/50 backdrop-blur-sm rounded-2xl p-6 border border-base-300">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-secondary/10 rounded-xl">
+          <div className="bg-base-200/50 backdrop-blur-sm rounded-xl p-4 border border-base-300">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-secondary/10 rounded-lg">
                 <FaBuilding className="text-2xl text-secondary" />
               </div>
               <div>
@@ -145,9 +145,9 @@ const ProfessionalPage = () => {
               </div>
             </div>
           </div>
-          <div className="bg-base-200/50 backdrop-blur-sm rounded-2xl p-6 border border-base-300">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-accent/10 rounded-xl">
+          <div className="bg-base-200/50 backdrop-blur-sm rounded-xl p-4 border border-base-300">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-accent/10 rounded-lg">
                 <FaFilter className="text-2xl text-accent" />
               </div>
               <div>
@@ -163,8 +163,8 @@ const ProfessionalPage = () => {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="mb-12 p-6 bg-base-200/50 backdrop-blur-sm rounded-2xl shadow-xl border border-base-300">
-          <div className="flex flex-col sm:flex-row gap-4 items-center">
+        <div className="mb-8 p-4 sm:p-6 bg-base-200/50 backdrop-blur-sm rounded-xl border border-base-content/10">
+          <div className="flex flex-col sm:flex-row gap-3 items-center">
             <div className="relative w-full">
               <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-base-content/50" />
               <input
@@ -204,7 +204,7 @@ const ProfessionalPage = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-base-200/50 backdrop-blur-sm rounded-2xl shadow-xl border border-base-300">
+          <div className="text-center py-12 bg-base-200/50 backdrop-blur-sm rounded-xl border border-base-content/10">
             <div className="inline-block p-4 bg-base-300/50 rounded-full mb-4">
               <FaSearch className="text-3xl text-base-content/50" />
             </div>

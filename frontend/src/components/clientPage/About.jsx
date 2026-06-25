@@ -32,7 +32,7 @@ const About = () => {
   return (
     <div className="flex flex-col bg-gradient-to-b from-base-200/50 to-base-100 pt-14">
       {/* Hero Section - About */}
-      <div className="relative h-[600px] w-full overflow-hidden">
+      <div className="relative h-[400px] sm:h-[500px] w-full overflow-hidden">
         {company?.aboutImage ? (
           <img 
             src={company.aboutImage} 
@@ -52,13 +52,13 @@ const About = () => {
               <img 
                 src={company.logo} 
                 alt={`${company.name} logo`} 
-                className="w-28 h-28 object-contain mb-6 mx-auto bg-white/10 p-2 rounded-full hover:scale-110 transition-transform duration-300" 
+                className="w-20 h-20 sm:w-24 sm:h-24 object-contain mb-4 mx-auto bg-white/10 p-2 rounded-full hover:scale-110 transition-transform duration-300" 
               />
             )}
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               About {company?.name}
             </h1>
-            <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
               {company?.about}
             </p>
           </div>
@@ -66,15 +66,15 @@ const About = () => {
       </div>
 
       {/* Cards Section - Mission & Vision */}
-      <div className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+      <div className="container mx-auto px-4 py-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
           Our Philosophy
         </h2>
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {/* Mission Card */}
           <div>
-            <Link to="/mission" className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-              <figure className="relative h-72">
+            <Link to="/mission" className="flex flex-col h-full bg-base-100 border border-base-content/10 rounded-2xl transition-all duration-300 overflow-hidden group hover:border-primary/30">
+              <figure className="relative h-48 sm:h-56">
                 {company?.missionImage ? (
                   <img 
                     src={company.missionImage} 
@@ -88,10 +88,10 @@ const About = () => {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-50 group-hover:opacity-30 transition-opacity duration-300"></div>
               </figure>
-              <div className="card-body">
-                <h3 className="card-title text-2xl font-bold group-hover:text-primary transition-colors duration-300">Our Mission</h3>
+              <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300 mb-3">Our Mission</h3>
                 <p className="text-base-content/80 line-clamp-4">{company?.mission}</p>
-                <div className="card-actions justify-end mt-4">
+                <div className="mt-4 flex justify-end mt-auto pt-4">
                   <button className="btn btn-primary btn-sm group-hover:btn-secondary transition-all duration-300">
                     Learn More
                   </button>
@@ -102,8 +102,8 @@ const About = () => {
           
           {/* Vision Card */}
           <div>
-            <Link to="/vision" className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-              <figure className="relative h-72">
+            <Link to="/vision" className="flex flex-col h-full bg-base-100 border border-base-content/10 rounded-2xl transition-all duration-300 overflow-hidden group hover:border-primary/30">
+              <figure className="relative h-48 sm:h-56">
                 {company?.visionImage ? (
                   <img 
                     src={company.visionImage} 
@@ -117,10 +117,10 @@ const About = () => {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-50 group-hover:opacity-30 transition-opacity duration-300"></div>
               </figure>
-              <div className="card-body">
-                <h3 className="card-title text-2xl font-bold group-hover:text-primary transition-colors duration-300">Our Vision</h3>
+              <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300 mb-3">Our Vision</h3>
                 <p className="text-base-content/80 line-clamp-4">{company?.vision}</p>
-                <div className="card-actions justify-end mt-4">
+                <div className="mt-4 flex justify-end mt-auto pt-4">
                   <button className="btn btn-secondary btn-sm group-hover:btn-primary transition-all duration-300">
                     Discover More
                   </button>

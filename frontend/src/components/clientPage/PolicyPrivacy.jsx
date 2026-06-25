@@ -49,7 +49,7 @@ const PolicyPrivacy = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-base-200/50 backdrop-blur-sm rounded-2xl shadow-xl border border-base-300 p-8"
+          className="bg-base-200/50 backdrop-blur-sm rounded-3xl border border-base-content/10 p-10 hover:border-primary/30 transition-all duration-300"
         >
           {loading ? (
             <div className="space-y-6">

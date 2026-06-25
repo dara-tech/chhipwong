@@ -70,8 +70,8 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-base-200/50 to-base-300 text-base-content">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-4">
@@ -153,19 +153,19 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-lg mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Contact Us</h4>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-base-100/50 transition-all duration-300">
+              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-base-100/50 transition-all duration-300">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <MdLocationOn className="text-primary w-5 h-5" />
                 </div>
                 <span className="text-base-content/70">{company?.contact?.address}</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-base-100/50 transition-all duration-300">
+              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-base-100/50 transition-all duration-300">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <MdPhone className="text-primary w-5 h-5" />
                 </div>
                 <span className="text-base-content/70">{company?.contact?.phone}</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-base-100/50 transition-all duration-300">
+              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-base-100/50 transition-all duration-300">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <MdEmail className="text-primary w-5 h-5" />
                 </div>
@@ -204,7 +204,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-base-300/20">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-base-content/70">
               © {new Date().getFullYear()} {company?.name}. All rights reserved.

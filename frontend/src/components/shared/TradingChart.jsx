@@ -351,9 +351,9 @@ const AdvancedTradingChart = () => {
   };
 
   return (
-    <div className={`card bg-base-100 shadow-xl ${isFullscreen ? 'fixed inset-4 z-50' : ''}`}>
+    <div className={`w-full flex flex-col ${isFullscreen ? 'fixed inset-4 z-50 bg-base-100 rounded-2xl shadow-2xl p-4' : ''}`}>
       {/* Header */}
-      <div className="p-4 sm:p-6 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-200 rounded-t-2xl">
+      <div className="p-3 sm:p-4 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-content/10 rounded-t-xl mb-3">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
@@ -410,7 +410,7 @@ const AdvancedTradingChart = () => {
 
       {/* Stats Cards */}
       {/* Mobile Card View for Stats */}
-      <div className="block sm:hidden p-4 border-b border-base-200 bg-base-100/50">
+      <div className="block sm:hidden p-3 border-b border-base-content/10 bg-base-100/50">
         {isLoading ? (
           <div className="grid grid-cols-2 gap-3">
             {[...Array(4)].map((_, i) => (
@@ -453,7 +453,7 @@ const AdvancedTradingChart = () => {
         )}
       </div>
       {/* Desktop Stats Grid (hidden on mobile) */}
-      <div className="hidden sm:block p-6 border-b border-base-200 bg-base-100/50">
+      <div className="hidden sm:block p-4 border-b border-base-content/10 bg-base-100/50">
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[...Array(4)].map((_, i) => (
@@ -502,7 +502,7 @@ const AdvancedTradingChart = () => {
       </div>
 
       {/* Controls */}
-      <div className="p-4 sm:p-6 border-b border-base-200">
+      <div className="p-3 sm:p-4 border-b border-base-content/10">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="dropdown w-full sm:w-auto">
@@ -573,7 +573,7 @@ const AdvancedTradingChart = () => {
       </div>
 
       {/* Chart */}
-      <div className="p-2 sm:p-6 pb-0">
+      <div className="p-2 sm:p-4 pb-0">
         <div 
           style={{ 
             transform: `scale(${zoomLevel})`, 

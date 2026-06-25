@@ -112,8 +112,8 @@ const SkeletonRow = () => (
 );
 
 const StatCard = ({ icon: Icon, label, value, change, trend }) => (
-  <div className="card bg-base-100 shadow-sm hover:shadow-md transition-all duration-200">
-    <div className="card-body p-4">
+  <div className="bg-base-100/50 backdrop-blur-sm border border-base-content/10 rounded-xl hover:border-primary/30 hover:bg-base-100 transition-all duration-300">
+    <div className="p-3 sm:p-4">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center space-x-2">
           <div className="p-2 rounded-lg bg-primary/10">
@@ -346,9 +346,9 @@ const AdvancedCryptoTable = () => {
   }
 
   return (
-    <div className="card bg-base-100">
+    <div className="w-full flex flex-col">
       {/* Header */}
-      <div className="card-body p-3 md:p-6 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-200">
+      <div className="p-3 md:p-4 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-xl border border-base-content/5 mb-3">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3 md:gap-4">
           <div className="flex items-center space-x-2 md:space-x-3">
             <div className="p-2 md:p-3 bg-primary rounded-lg md:rounded-xl shadow-lg">
@@ -382,8 +382,8 @@ const AdvancedCryptoTable = () => {
 
       {/* Market Stats */}
       {marketStats && (
-        <div className="card-body p-3 md:p-6 border-b border-base-200">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
+        <div className="p-2 md:p-4 mb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
             <StatCard
               icon={BarChart3}
               label="24h Volume"
@@ -405,7 +405,7 @@ const AdvancedCryptoTable = () => {
       )}
 
       {/* Controls */}
-      <div className="card-body p-3 md:p-6 border-b border-base-200">
+      <div className="p-2 md:p-4 mb-2">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4">
           <div className="w-full md:w-auto">
             <div className="form-control relative w-full max-w-xs">
@@ -451,7 +451,7 @@ const AdvancedCryptoTable = () => {
               return (
                 <div
                   key={crypto.symbol}
-                  className="bg-base-100 rounded-xl shadow border border-base-200 p-4 flex items-center space-x-3"
+                  className="bg-base-100/50 backdrop-blur-sm rounded-xl border border-base-content/10 hover:border-primary/30 p-3 flex items-center space-x-3 transition-all duration-300"
                 >
                   <CryptoLogo crypto={pairInfo} />
                   <div className="flex-1 min-w-0">
@@ -584,7 +584,7 @@ const AdvancedCryptoTable = () => {
       </div>
 
       {/* Footer */}
-      <div className="card-body p-3 md:p-6 bg-base-200/50 border-t border-base-200">
+      <div className="p-3 md:p-4 bg-base-200/50 rounded-xl mt-3">
         <div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-3 text-xs md:text-sm text-base-content/70">
           <div className="flex items-center space-x-3 md:space-x-4">
             <div className="flex items-center">
