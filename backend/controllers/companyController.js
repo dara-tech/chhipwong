@@ -116,7 +116,7 @@ export const updateCompany = async (req, res) => {
     }
 
     // Handle text fields
-    const textFields = ['name', 'about', 'mission', 'vision', 'privacyPolicy', 'termsConditions', 'paymentGateway'];
+    const textFields = ['name', 'about', 'mission', 'vision', 'privacyPolicy', 'termsConditions', 'paymentGateway', 'termsPdfUrl'];
     textFields.forEach(field => {
       if (req.body[field] !== undefined) {
         company[field] = req.body[field];
@@ -164,7 +164,12 @@ export const updateCompany = async (req, res) => {
     for (const field of singleImageFields) {
       if (req.files?.[field]?.[0]) {
         try {
-          company[field] = await uploadToCloudinary(req.files[field][0].buffer, `company_${field.toLowerCase()}`);
+          const url = await uploadToCloudinary(req.files[field][0].buffer, `company_${field.toLowerCase()}`);
+          if (field === 'termsPdf') {
+            company.termsPdfUrl = url;
+          } else {
+            company[field] = url;
+          }
         } catch (e) {
           console.error(`Error uploading ${field}:`, e);
         }

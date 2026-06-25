@@ -168,8 +168,8 @@ const TermsAndConditions = ({ formData, onInputChange }) => {
         </div>
       </div>
 
-      {hasPdf ? (
-        <div className="rounded-xl border border-base-300 shadow-lg overflow-hidden bg-base-100 flex flex-col">
+      {hasPdf && (
+        <div className="rounded-xl border border-base-300 shadow-lg overflow-hidden bg-base-100 flex flex-col mb-6">
           <div className="flex justify-between items-center p-3 border-b border-base-300 bg-base-200/50">
             <div className="flex items-center gap-2 text-primary font-medium">
               <FaFilePdf className="text-xl" />
@@ -189,10 +189,10 @@ const TermsAndConditions = ({ formData, onInputChange }) => {
             title="Terms and Conditions PDF"
           />
         </div>
-      ) : (
-        <>
-          <div className="rounded-xl border border-base-300 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-            <Toolbar editor={editor} />
+      )}
+
+      <div className="rounded-xl border border-base-300 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+        <Toolbar editor={editor} />
             <div className="p-4 min-h-[16rem] bg-base-100">
               <EditorContent 
                 editor={editor} 
@@ -209,8 +209,6 @@ const TermsAndConditions = ({ formData, onInputChange }) => {
               </p>
             </div>
           )}
-        </>
-      )}
     </div>
   )
 }

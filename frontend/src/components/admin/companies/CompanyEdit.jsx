@@ -294,7 +294,9 @@ const CompanyEdit = () => {
       if (formData.termsPdf instanceof File) {
         formDataToSend.append("termsPdf", formData.termsPdf);
       } else if (typeof formData.termsPdf === 'string') {
-        // Just keeping the old string URL if we send it back, though backend doesn't strictly need it
+        formDataToSend.append("termsPdfUrl", formData.termsPdf);
+      } else if (formData.termsPdf === null) {
+        formDataToSend.append("termsPdfUrl", "");
       }
       
       // Handle logo file if updated

@@ -65,14 +65,33 @@ const TermsAndConditions = () => {
                 </motion.div>
               ))}
             </div>
-          ) : companies?.[0]?.termsConditions ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="prose prose-lg max-w-none prose-headings:text-base-content prose-p:text-base-content/80 prose-strong:text-primary prose-a:text-primary hover:prose-a:text-primary-focus"
-              dangerouslySetInnerHTML={{ __html: companies[0].termsConditions }}
-            />
+          ) : companies?.[0]?.termsPdfUrl || companies?.[0]?.termsConditions ? (
+            <div className="space-y-8">
+              {companies[0].termsPdfUrl && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full h-[800px] rounded-xl overflow-hidden border border-base-300 shadow-inner bg-base-100"
+                >
+                  <iframe 
+                    src={companies[0].termsPdfUrl} 
+                    className="w-full h-full border-none"
+                    title="Terms and Conditions PDF"
+                  />
+                </motion.div>
+              )}
+              
+              {companies[0].termsConditions && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="prose prose-lg max-w-none prose-headings:text-base-content prose-p:text-base-content/80 prose-strong:text-primary prose-a:text-primary hover:prose-a:text-primary-focus"
+                  dangerouslySetInnerHTML={{ __html: companies[0].termsConditions }}
+                />
+              )}
+            </div>
           ) : (
             <motion.div
               initial={{ opacity: 0 }}
