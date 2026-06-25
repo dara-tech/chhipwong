@@ -112,22 +112,22 @@ const SkeletonRow = () => (
 );
 
 const StatCard = ({ icon: Icon, label, value, change, trend }) => (
-  <div className="card bg-base-100 shadow-sm border border-base-200 hover:shadow-md transition-all duration-200">
-    <div className="p-3 sm:p-4">
+  <div className="card bg-base-100 shadow-sm hover:shadow-md transition-all duration-200">
+    <div className="card-body p-4">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center space-x-2">
-          <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
-            <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+          <div className="p-2 rounded-lg bg-primary/10">
+            <Icon className="w-4 h-4 text-primary" />
           </div>
-          <span className="text-xs sm:text-sm font-medium text-base-content/70">{label}</span>
+          <span className="text-sm font-medium text-base-content/70">{label}</span>
         </div>
         {trend !== undefined && (
-          <div className={`badge badge-sm sm:badge-md ${trend > 0 ? 'badge-success' : 'badge-error'}`}>
+          <div className={`badge ${trend > 0 ? 'badge-success' : 'badge-error'}`}>
             {trend > 0 ? '+' : ''}{trend.toFixed(1)}%
           </div>
         )}
       </div>
-      <p className="text-sm sm:text-lg font-bold text-base-content">{value}</p>
+      <p className="text-lg font-bold text-base-content">{value}</p>
     </div>
   </div>
 );
@@ -348,8 +348,8 @@ const AdvancedCryptoTable = () => {
   return (
     <div className="card bg-base-100">
       {/* Header */}
-      <div className="card-body p-0 py-2 md:p-6 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-200">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 md:gap-4">
+      <div className="card-body p-3 md:p-6 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-200">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3 md:gap-4">
           <div className="flex items-center space-x-2 md:space-x-3">
             <div className="p-2 md:p-3 bg-primary rounded-lg md:rounded-xl shadow-lg">
               <Activity className="w-4 h-4 md:w-6 md:h-6 text-primary-content" />
@@ -382,8 +382,8 @@ const AdvancedCryptoTable = () => {
 
       {/* Market Stats */}
       {marketStats && (
-        <div className="p-0 py-2 sm:p-6 border-b border-base-200 bg-base-100/50">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="card-body p-3 md:p-6 border-b border-base-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
             <StatCard
               icon={BarChart3}
               label="24h Volume"
@@ -391,8 +391,8 @@ const AdvancedCryptoTable = () => {
             />
             <StatCard
               icon={TrendingUp}
-              label="Sentiment"
-              value={`${marketStats.gainersPercentage.toFixed(0)}% Bull`}
+              label="Market Sentiment"
+              value={`${marketStats.gainersPercentage.toFixed(0)}% Bullish`}
               trend={marketStats.avgChange}
             />
             <StatCard
@@ -405,27 +405,29 @@ const AdvancedCryptoTable = () => {
       )}
 
       {/* Controls */}
-      <div className="p-0 py-2 sm:p-6 border-b border-base-200">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-4">
+      <div className="card-body p-3 md:p-6 border-b border-base-200">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4">
           <div className="w-full md:w-auto">
-            <div className="form-control relative w-full sm:max-w-xs">
+            <div className="form-control relative w-full max-w-xs">
               <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search cryptocurrencies..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="input input-bordered w-full pl-8 pr-8 md:pl-10 md:pr-10 h-9 md:h-10 text-sm"
-                />
-                <Search className="w-3.5 h-3.5 md:w-4 md:h-4 absolute left-2.5 md:left-3 top-1/2 transform -translate-y-1/2 text-base-content/50" />
-                {searchTerm && (
-                  <button 
-                    onClick={() => setSearchTerm('')}
-                    className="absolute right-2.5 md:right-3 top-1/2 transform -translate-y-1/2 btn btn-ghost btn-xs p-1 hover:bg-base-200 rounded-full"
-                  >
-                    <X className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  </button>
-                )}
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search cryptocurrencies..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="input input-bordered w-full pl-8 pr-8 md:pl-10 md:pr-10 h-9 md:h-10 text-sm"
+                  />
+                  <Search className="w-3.5 h-3.5 md:w-4 md:h-4 absolute left-2.5 md:left-3 top-1/2 transform -translate-y-1/2 text-base-content/50" />
+                  {searchTerm && (
+                    <button 
+                      onClick={() => setSearchTerm('')}
+                      className="absolute right-2.5 md:right-3 top-1/2 transform -translate-y-1/2 btn btn-ghost btn-xs p-1 hover:bg-base-200 rounded-full"
+                    >
+                      <X className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -433,15 +435,15 @@ const AdvancedCryptoTable = () => {
       </div>
 
       {/* Mobile Card View */}
-      <div className="block sm:hidden p-0 bg-base-200/30">
+      <div className="block sm:hidden">
         {filteredAndSortedCryptos.length === 0 ? (
-          <div className="flex flex-col items-center space-y-2 py-8 bg-base-100 rounded-xl">
+          <div className="flex flex-col items-center space-y-2 py-8">
             <AlertCircle className="w-10 h-10 text-base-content/30" />
-            <p className="text-sm font-medium text-base-content/70">No cryptocurrencies found</p>
-            <p className="text-xs text-base-content/50">Try adjusting your search</p>
+            <p className="text-base text-base-content/70">No cryptocurrencies found</p>
+            <p className="text-sm text-base-content/50">Try adjusting your search</p>
           </div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {filteredAndSortedCryptos.map((crypto) => {
               const isPositive24h = parseFloat(crypto.priceChangePercent || 0) >= 0;
               const pairInfo = POPULAR_PAIRS.find(pair => pair.symbol === crypto.symbol);
@@ -449,22 +451,26 @@ const AdvancedCryptoTable = () => {
               return (
                 <div
                   key={crypto.symbol}
-                  className="bg-base-100 rounded-xl shadow-sm border border-base-200 p-3 flex items-center space-x-3 hover:bg-base-200/50 transition-colors"
+                  className="bg-base-100 rounded-xl shadow border border-base-200 p-4 flex items-center space-x-3"
                 >
-                  <CryptoLogo crypto={pairInfo} size="sm" />
+                  <CryptoLogo crypto={pairInfo} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="font-semibold text-sm truncate">{pairInfo?.name || symbol}</div>
-                        <div className="text-[10px] text-base-content/50 uppercase">{symbol}</div>
+                        <div className="font-semibold text-base truncate">{pairInfo?.name || symbol}</div>
+                        <div className="text-xs text-base-content/50">{symbol}/USDT</div>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-sm">{formatPrice(parseFloat(crypto.lastPrice || 0))}</div>
-                        <div className={`badge badge-sm ${isPositive24h ? 'badge-success' : 'badge-error'} mt-0.5`}>
-                          {isPositive24h ? <TrendingUp className="w-2 h-2 mr-0.5" /> : <TrendingDown className="w-2 h-2 mr-0.5" />}
-                          <span className="text-[10px]">{Math.abs(parseFloat(crypto.priceChangePercent || 0)).toFixed(2)}%</span>
+                        <div className="font-bold text-base">{formatPrice(parseFloat(crypto.lastPrice || 0))}</div>
+                        <div className={`badge badge-xs ${isPositive24h ? 'badge-success' : 'badge-error'} mt-1`}>
+                          {isPositive24h ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
+                          {Math.abs(parseFloat(crypto.priceChangePercent || 0)).toFixed(2)}%
                         </div>
                       </div>
+                    </div>
+                    <div className="flex items-center justify-between mt-2">
+                      <span className="text-xs text-base-content/60">Volume</span>
+                      <span className="text-xs font-medium">{formatVolume(parseFloat(crypto.volume || 0))}</span>
                     </div>
                   </div>
                 </div>

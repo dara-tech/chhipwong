@@ -19,11 +19,11 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/kraken': {
-        target: 'https://api.kraken.com',
+      '/binance': {
+        target: 'https://api.binance.com',
         changeOrigin: true,
         secure: true,
-        rewrite: (path) => path.replace(/^\/kraken/, '/0/public'),
+        rewrite: (path) => path.replace(/^\/binance/, '/api/v3'),
       },
     },
   },
