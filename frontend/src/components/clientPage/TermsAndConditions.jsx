@@ -20,7 +20,7 @@ const TermsAndConditions = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 py-2 px-4">
-      <div className="max-w-4xl mx-auto pt-20">
+      <div className="max-w-4xl mx-auto pt-14">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

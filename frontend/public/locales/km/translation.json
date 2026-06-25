@@ -139,6 +139,8 @@
   "auth": {
     "logout": "ចាកចេញ"
   },
+  "Profile": "គណនី",
+  "logout": "ចាកចេញ",
   "appName": "KH HARA",
   "company": {
     "heroSection": "ផ្នែករូបភាពសំខាន់",

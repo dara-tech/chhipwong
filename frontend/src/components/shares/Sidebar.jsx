@@ -176,10 +176,10 @@ const Sidebar = ({ onCollapse }) => {
 
   return (
     <div className={`fixed top-0 left-0 h-screen bg-base-100 border-r border-base-300/20 transition-all duration-300 z-40 ${
-      isCollapsed ? 'w-20' : 'w-64'
+      isCollapsed ? 'w-16' : 'w-56'
     }`}>
       {/* Company Logo and Name */}
-      <div className="h-20 flex items-center px-4 border-b border-base-300/20">
+      <div className="h-14 flex items-center px-3 border-b border-base-300/20">
         {/* <Link to="/" className="flex items-center gap-3">
           <div className="relative">
             {companiesLoading ? (
@@ -213,7 +213,7 @@ const Sidebar = ({ onCollapse }) => {
       </div>
 
       {/* Navigation Links */}
-      <div className="py-4 px-4 justify-start flex flex-col ">
+      <div className="py-2 px-2 justify-start flex flex-col gap-0.5">
         {activeLinks.map(link => {
           if (link.isDropdown) {
             const isDropdownActive = link.subMenu && link.subMenu.some(subLink => location.pathname.startsWith(subLink.to));
@@ -221,24 +221,24 @@ const Sidebar = ({ onCollapse }) => {
               <div key={link.label} className="relative" ref={aboutSubMenuRef}>
                 <button
                   onClick={toggleAboutSubMenu}
-                  className={`w-full px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 ${
+                  className={`w-full px-2.5 py-2 rounded-lg text-sm font-medium flex items-center gap-2.5 ${
                     isDropdownActive
                       ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary'
                       : 'hover:bg-base-200/80'
                   }`}
                 >
-                  <span className={`text-lg ${isDropdownActive ? 'text-primary' : ''}`}>
+                  <span className={`text-base flex-shrink-0 ${isDropdownActive ? 'text-primary' : ''}`}>
                     {isDropdownActive ? link.activeIcon : link.icon}
                   </span>
                   {!isCollapsed && (
                     <>
-                      <span className="flex-1 text-left">{link.label}</span>
-                      <FaChevronDown className={`w-3 h-3 ${isAboutSubMenuOpen ? 'rotate-180' : ''}`} />
+                      <span className="flex-1 text-left text-xs">{link.label}</span>
+                      <FaChevronDown className={`w-2.5 h-2.5 ${isAboutSubMenuOpen ? 'rotate-180' : ''}`} />
                     </>
                   )}
                 </button>
                 {isAboutSubMenuOpen && !isCollapsed && (
-                  <div className="mt-1 ml-4 space-y-1">
+                  <div className="mt-1 ml-3 space-y-0.5">
                     {link.subMenu.map(subLink => {
                       const isSubActive = location.pathname.startsWith(subLink.to);
                       return (
@@ -246,13 +246,13 @@ const Sidebar = ({ onCollapse }) => {
                           key={subLink.to}
                           to={subLink.to}
                           onClick={() => setIsAboutSubMenuOpen(false)}
-                          className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
+                          className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs ${
                             isSubActive 
                               ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary' 
                               : 'text-base-content/80 hover:bg-base-200/80'
                           }`}
                         >
-                          <span className="text-lg">{isSubActive ? subLink.activeIcon : subLink.icon}</span>
+                          <span className="text-sm">{isSubActive ? subLink.activeIcon : subLink.icon}</span>
                           {subLink.label}
                         </Link>
                       );
@@ -267,18 +267,18 @@ const Sidebar = ({ onCollapse }) => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium group relative ${
+                className={`flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm font-medium group relative ${
                   isActive
                     ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary'
                     : 'hover:bg-base-200/80'
                 }`}
               >
-                <span className={`text-lg ${isActive ? 'text-primary' : ''}`}>
+                <span className={`text-base flex-shrink-0 ${isActive ? 'text-primary' : ''}`}>
                   {isActive ? link.activeIcon : link.icon}
                 </span>
-                {!isCollapsed && <span>{link.label}</span>}
+                {!isCollapsed && <span className="text-xs">{link.label}</span>}
                 {isCollapsed && (
-                  <div className="absolute left-full ml-2 px-2 py-1 bg-base-100 rounded-lg shadow-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <div className="absolute left-full ml-2 px-2 py-1 bg-base-100 rounded-lg shadow-lg text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                     {link.label}
                   </div>
                 )}
@@ -289,34 +289,34 @@ const Sidebar = ({ onCollapse }) => {
       </div>
 
       {/* Profile Section */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-base-300/20">
+      <div className="absolute bottom-0 left-0 right-0 p-2 border-t border-base-300/20">
         {profileLoading ? (
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-base-300/50 animate-pulse" />
-            {!isCollapsed && <div className="h-5 w-32 bg-base-300/50 rounded animate-pulse" />}
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-base-300/50 animate-pulse" />
+            {!isCollapsed && <div className="h-4 w-24 bg-base-300/50 rounded animate-pulse" />}
           </div>
         ) : profile ? (
           <div className="relative" ref={profileMenuRef}>
-            <div className="w-full flex items-center gap-3 px-3 py-2 rounded-xl">
+            <div className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg">
               {profile.profilePic ? (
                 <img
                   src={profile.profilePic}
                   alt={profile.name || 'Profile'}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/default-avatar.png';
                   }}
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                  <FaUserCircle className="w-6 h-6 text-primary" />
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center flex-shrink-0">
+                  <FaUserCircle className="w-5 h-5 text-primary" />
                 </div>
               )}
               {!isCollapsed && (
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{profile.name || 'User'}</p>
-                  <p className="text-xs text-base-content/60 truncate capitalize">{profile.type?.replace('_', ' ') || 'User'}</p>
+                  <p className="text-xs font-medium truncate">{profile.name || 'User'}</p>
+                  <p className="text-xs text-base-content/50 truncate capitalize">{profile.type?.replace('_', ' ') || 'User'}</p>
                 </div>
               )}
             </div>
@@ -324,11 +324,11 @@ const Sidebar = ({ onCollapse }) => {
             <button
               onClick={handleLogout}
               disabled={isLoggingOut}
-              className={`mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold bg-error text-white hover:bg-error/90 transition-colors shadow ${
+              className={`mt-1.5 w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-error text-white hover:bg-error/90 transition-colors shadow ${
                 isLoggingOut ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
-              <HiOutlineLogout className={`w-5 h-5 ${isLoggingOut ? 'animate-spin' : ''}`} />
+              <HiOutlineLogout className={`w-4 h-4 ${isLoggingOut ? 'animate-spin' : ''}`} />
               {!isCollapsed && (isLoggingOut ? t('loggingOut') : t('logout'))}
             </button>
             {/* Dropdown remains for profile details if needed */}
@@ -388,7 +388,7 @@ const Sidebar = ({ onCollapse }) => {
       {/* Collapse Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className="absolute -right-3 top-20 w-6 h-6 rounded-full bg-base-100 border border-base-300/20 flex items-center justify-center hover:bg-base-200/80 transition-colors"
+        className="absolute -right-3 top-14 w-6 h-6 rounded-full bg-base-100 border border-base-300/20 flex items-center justify-center hover:bg-base-200/80 transition-colors"
       >
         <FaChevronDown className={`w-3 h-3 transform transition-transform ${isCollapsed ? 'rotate-180' : ''}`} />
       </button>

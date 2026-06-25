@@ -55,12 +55,12 @@ const MainLayout = () => {
         className={`transition-all duration-300 ${
           showSidebar && !isMobile
             ? isSidebarCollapsed 
-              ? 'ml-20' 
-              : 'ml-64'
+              ? 'ml-16' 
+              : 'ml-56'
             : ''
         }`}
       >
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-6">
           <Outlet />
         </div>
       </main>

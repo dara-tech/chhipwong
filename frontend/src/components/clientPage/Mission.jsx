@@ -31,7 +31,7 @@ const Mission = () => {
   const company = companies[0]
 
   return (
-    <div className="flex flex-col bg-gradient-to-b from-base-200/50 to-base-100 pt-20">
+    <div className="flex flex-col bg-gradient-to-b from-base-200/50 to-base-100 pt-14">
       {/* Hero Section - Mission */}
       <div className="relative h-[600px] w-full overflow-hidden">
         {company?.missionImage ? (

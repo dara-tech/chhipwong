@@ -18,6 +18,13 @@ export default defineConfig({
     }),
   ],
   server: {
-    // Remove proxy configuration since we're using direct API endpoint
+    proxy: {
+      '/kraken': {
+        target: 'https://api.kraken.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/kraken/, '/0/public'),
+      },
+    },
   },
 })

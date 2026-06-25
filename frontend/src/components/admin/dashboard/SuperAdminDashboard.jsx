@@ -20,22 +20,22 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 const StatCard = ({ title, value, icon: Icon, trend, color }) => (
-  <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-base-300/20">
+  <div className="bg-base-100 rounded-xl p-4 shadow border border-base-300/20">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-base-content/60">{title}</p>
-        <h3 className="text-2xl font-bold mt-1 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <p className="text-xs font-medium text-base-content/60 uppercase tracking-wide">{title}</p>
+        <h3 className="text-xl font-bold mt-0.5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           {value}
         </h3>
       </div>
-      <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center`}>
-        <Icon className="w-6 h-6 text-white" />
+      <div className={`w-9 h-9 rounded-lg ${color} flex items-center justify-center`}>
+        <Icon className="w-4 h-4 text-white" />
       </div>
     </div>
     {trend !== undefined && (
-      <div className="mt-4 flex items-center gap-2">
-        <span className={`text-sm ${trend > 0 ? 'text-success' : 'text-error'}`}>{trend > 0 ? '+' : ''}{trend}%</span>
-        <span className="text-sm text-base-content/60">vs last month</span>
+      <div className="mt-2 flex items-center gap-1.5">
+        <span className={`text-xs ${trend > 0 ? 'text-success' : 'text-error'}`}>{trend > 0 ? '+' : ''}{trend}%</span>
+        <span className="text-xs text-base-content/60">vs last month</span>
       </div>
     )}
   </div>
@@ -79,27 +79,27 @@ const SuperAdminDashboard = () => {
   };
 
   return (
-    <div className="space-y-6 pt-20">
+    <div className="space-y-4 pt-16">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Super Admin Dashboard
           </h1>
-          <p className="text-base-content/60 mt-1">
+          <p className="text-sm text-base-content/60 mt-0.5">
             Welcome back! Here's what's happening with your system.
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="btn btn-primary gap-2">
-            <RiAlertLine className="w-4 h-4" />
+        <div className="flex items-center gap-2">
+          <button className="btn btn-primary btn-sm gap-1.5">
+            <RiAlertLine className="w-3.5 h-3.5" />
             View Alerts
           </button>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <StatCard
           title="Total Users"
           value={stats.totalUsers}
@@ -107,7 +107,7 @@ const SuperAdminDashboard = () => {
           color="bg-primary"
         />
         <StatCard
-          title="Active Companies"
+          title="Companies"
           value={stats.activeCompanies}
           icon={RiBuildingLine}
           color="bg-secondary"
@@ -125,7 +125,7 @@ const SuperAdminDashboard = () => {
           color="bg-info"
         />
         <StatCard
-          title="Active Alerts"
+          title="Alerts"
           value={stats.activeAlerts}
           icon={RiAlertLine}
           color="bg-warning"
@@ -139,43 +139,43 @@ const SuperAdminDashboard = () => {
       </div>
 
       {/* Recent Logins Table */}
-      <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-base-300/20">
-        <h2 className="text-lg font-semibold mb-4">Recent User Logins</h2>
+      <div className="bg-base-100 rounded-xl p-4 shadow border border-base-300/20">
+        <h2 className="text-sm font-semibold mb-3 text-base-content/80 uppercase tracking-wide">Recent User Logins</h2>
         {usersLoading ? (
-          <div>Loading...</div>
+          <div className="text-sm text-base-content/50">Loading...</div>
         ) : usersError ? (
-          <div className="text-error">{usersError}</div>
+          <div className="text-error text-sm">{usersError}</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="table w-full">
+            <table className="table table-sm w-full">
               <thead>
                 <tr className="bg-base-200/50">
-                  <th className="p-4 font-semibold text-left">User</th>
-                  <th className="p-4 font-semibold text-left">Last Login</th>
-                  <th className="p-4 font-semibold text-left">IP Address</th>
-                  <th className="p-4 font-semibold text-left">Location</th>
+                  <th className="p-2.5 text-xs font-semibold text-left text-base-content/60">User</th>
+                  <th className="p-2.5 text-xs font-semibold text-left text-base-content/60">Last Login</th>
+                  <th className="p-2.5 text-xs font-semibold text-left text-base-content/60">IP Address</th>
+                  <th className="p-2.5 text-xs font-semibold text-left text-base-content/60">Location</th>
                 </tr>
               </thead>
               <tbody>
                 {recentLogins.length === 0 ? (
-                  <tr><td colSpan={4} className="text-center p-4">No recent logins.</td></tr>
+                  <tr><td colSpan={4} className="text-center p-3 text-sm text-base-content/50">No recent logins.</td></tr>
                 ) : recentLogins.map(user => (
-                  <tr key={user._id} className="border-b border-base-300">
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <tr key={user._id} className="border-b border-base-300/50 hover:bg-base-200/30">
+                    <td className="p-2.5">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                           {user.profilePic ? (
                             <img src={user.profilePic} alt={user.name} className="w-full h-full rounded-full object-cover" />
                           ) : (
-                            <RiUserLine className="w-4 h-4 text-primary" />
+                            <RiUserLine className="w-3 h-3 text-primary" />
                           )}
                         </div>
-                        <span className="font-medium">{user.name}</span>
+                        <span className="text-sm font-medium">{user.name}</span>
                       </div>
                     </td>
-                    <td className="p-4">{user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'Never'}</td>
-                    <td className="p-4">{user.lastLoginIp || '-'}</td>
-                    <td className="p-4">
+                    <td className="p-2.5 text-xs text-base-content/70">{user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'Never'}</td>
+                    <td className="p-2.5 text-xs text-base-content/70">{user.lastLoginIp || '-'}</td>
+                    <td className="p-2.5 text-xs text-base-content/70">
                       {user.lastLoginLocation && typeof user.lastLoginLocation === 'object' && user.lastLoginLocation.status !== 'fail'
                         ? `${user.lastLoginLocation.country || ''}${user.lastLoginLocation.city ? ', ' + user.lastLoginLocation.city : ''}`
                         : '-'}
@@ -189,9 +189,9 @@ const SuperAdminDashboard = () => {
       </div>
 
       {/* Map of Viewer Locations (Advanced) */}
-      <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-base-300/20">
-        <h2 className="text-lg font-semibold mb-4">Viewer Locations</h2>
-        <div style={{ height: '400px', width: '100%' }}>
+      <div className="bg-base-100 rounded-xl p-4 shadow border border-base-300/20">
+        <h2 className="text-sm font-semibold mb-3 text-base-content/80 uppercase tracking-wide">Viewer Locations</h2>
+        <div style={{ height: '280px', width: '100%' }}>
           <MapContainer center={[20, 0]} zoom={2} style={{ height: '100%', width: '100%' }} scrollWheelZoom={true}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -218,42 +218,42 @@ const SuperAdminDashboard = () => {
       </div>
 
       {/* System Status - Placeholder */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-base-300/20">
-          <h2 className="text-lg font-semibold mb-4">System Status</h2>
-          <div className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <div className="bg-base-100 rounded-xl p-4 shadow border border-base-300/20">
+          <h2 className="text-sm font-semibold mb-3 text-base-content/80 uppercase tracking-wide">System Status</h2>
+          <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-base-content/60">API Status</span>
-              <span className="px-3 py-1 rounded-full bg-success/10 text-success text-sm">Operational</span>
+              <span className="text-xs text-base-content/60">API Status</span>
+              <span className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-medium">Operational</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-base-content/60">Database Status</span>
-              <span className="px-3 py-1 rounded-full bg-success/10 text-success text-sm">Operational</span>
+              <span className="text-xs text-base-content/60">Database Status</span>
+              <span className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-medium">Operational</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-base-content/60">Cache Status</span>
-              <span className="px-3 py-1 rounded-full bg-success/10 text-success text-sm">Operational</span>
+              <span className="text-xs text-base-content/60">Cache Status</span>
+              <span className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-medium">Operational</span>
             </div>
           </div>
         </div>
 
-        <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-base-300/20">
-          <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <button className="btn btn-primary btn-outline gap-2">
-              <RiUserLine className="w-4 h-4" />
+        <div className="bg-base-100 rounded-xl p-4 shadow border border-base-300/20">
+          <h2 className="text-sm font-semibold mb-3 text-base-content/80 uppercase tracking-wide">Quick Actions</h2>
+          <div className="grid grid-cols-2 gap-2">
+            <button className="btn btn-primary btn-outline btn-sm gap-1.5">
+              <RiUserLine className="w-3.5 h-3.5" />
               Add User
             </button>
-            <button className="btn btn-secondary btn-outline gap-2">
-              <RiBuildingLine className="w-4 h-4" />
+            <button className="btn btn-secondary btn-outline btn-sm gap-1.5">
+              <RiBuildingLine className="w-3.5 h-3.5" />
               Add Company
             </button>
-            <button className="btn btn-accent btn-outline gap-2">
-              <RiMoneyDollarCircleLine className="w-4 h-4" />
+            <button className="btn btn-accent btn-outline btn-sm gap-1.5">
+              <RiMoneyDollarCircleLine className="w-3.5 h-3.5" />
               View Reports
             </button>
-            <button className="btn btn-info btn-outline gap-2">
-              <RiShieldCheckLine className="w-4 h-4" />
+            <button className="btn btn-info btn-outline btn-sm gap-1.5">
+              <RiShieldCheckLine className="w-3.5 h-3.5" />
               Security
             </button>
           </div>

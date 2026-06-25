@@ -132,6 +132,8 @@
     "settings": "Profile Settings"
   },
   "settings": "Settings",
+  "Profile": "Profile",
+  "logout": "Logout",
   "paymentViewer": {
     "title": "Payments",
     "noPaymentInfo": "No payment information available"

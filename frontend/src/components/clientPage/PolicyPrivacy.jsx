@@ -25,7 +25,7 @@ const PolicyPrivacy = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center gap-4 mb-12 pt-20"
+          className="flex items-center gap-4 mb-12 pt-14"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}

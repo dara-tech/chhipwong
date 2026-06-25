@@ -198,16 +198,16 @@ const Navbar = () => {
       isScrolled ? 'bg-base-100/80 backdrop-blur-xl shadow-lg border-b border-base-300/20' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-14">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center group">
               <div className="relative items-center">
                 {companiesLoading ? (
-                  <div className="w-10 h-10 rounded-xl bg-base-300/50 " />
+                  <div className="w-8 h-8 rounded-lg bg-base-300/50 " />
                 ) : currentCompany?.logo ? (
                   <img
-                    className="object-cover w-10 h-10 rounded-xl"
+                    className="object-cover w-8 h-8 rounded-lg"
                     src={currentCompany.logo}
                     alt={currentCompany.name}
                     onError={(e) => {
@@ -216,15 +216,15 @@ const Navbar = () => {
                     }}
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-lg bg-gradient-to-br from-primary/10 to-secondary/10 text-white shadow-lg">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-sm bg-gradient-to-br from-primary/10 to-secondary/10 text-white shadow">
                     {currentCompany?.name.charAt(0).toUpperCase()}
                   </div>
                 )}
               </div>
-              <div className="ml-4">
-                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <div className="ml-2.5">
+                <span className="text-base font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   {companiesLoading ? (
-                    <div className="h-7 w-40 rounded bg-base-300/50" />
+                    <div className="h-5 w-32 rounded bg-base-300/50" />
                   ) : (
                     currentCompany?.name || t('appName')
                   )}
@@ -234,7 +234,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-2">
+          <div className="hidden md:flex md:items-center md:space-x-1">
             {activeLinks.map(link => {
               if (link.isDropdown) {
                 const isDropdownActive = link.subMenu && link.subMenu.some(subLink => location.pathname.startsWith(subLink.to));
@@ -242,13 +242,13 @@ const Navbar = () => {
                   <div key={link.label} className="relative" ref={aboutSubMenuRef}>
                     <button
                       onClick={toggleAboutSubMenu}
-                      className={`relative px-5 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2.5 ${
+                      className={`relative px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 ${
                         isDropdownActive
                           ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary'
                           : 'hover:bg-base-200/80'
                       }`}
                     >
-                      <span className={`text-lg ${isDropdownActive ? 'text-primary' : ''}`}>
+                      <span className={`text-base ${isDropdownActive ? 'text-primary' : ''}`}>
                         {isDropdownActive ? link.activeIcon : link.icon}
                       </span>
                       {link.label}
@@ -286,13 +286,13 @@ const Navbar = () => {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`relative px-5 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2.5 ${
+                    className={`relative px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 ${
                       isActive
                         ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary'
                         : 'hover:bg-base-200/80'
                     }`}
                   >
-                    <span className={`text-lg ${isActive ? 'text-primary' : ''}`}>
+                    <span className={`text-base ${isActive ? 'text-primary' : ''}`}>
                       {isActive ? link.activeIcon : link.icon}
                     </span>
                     {link.label}
@@ -302,24 +302,24 @@ const Navbar = () => {
             })}
 
             {/* Language Switcher */}
-            <div className="ml-3">
+            <div className="ml-2">
               <LanguageSwitcher />
             </div>
 
             {/* Profile Section */}
             {profileLoading ? (
-              <div className="flex items-center space-x-3 ml-4">
-                <div className="w-11 h-11 rounded-full bg-base-300/50" />
-                <div className="h-5 w-28 bg-base-300/50 rounded" />
+              <div className="flex items-center space-x-2 ml-2">
+                <div className="w-8 h-8 rounded-full bg-base-300/50" />
+                <div className="h-4 w-20 bg-base-300/50 rounded" />
               </div>
             ) : profile ? (
-              <div className="relative ml-4" ref={profileMenuRef}>
+              <div className="relative ml-2" ref={profileMenuRef}>
                 <button
                   onClick={toggleProfileMenu}
-                  className="flex items-center space-x-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-base-200/80"
+                  className="flex items-center space-x-2 px-2.5 py-1.5 rounded-lg text-sm font-medium hover:bg-base-200/80"
                 >
                   <div className="relative">
-                    <div className="w-11 h-11 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary p-[2px] shadow-lg">
+                    <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary p-[2px] shadow">
                       <div className="w-full h-full rounded-full overflow-hidden bg-base-100">
                         {profile.profilePic ? (
                           <img
@@ -333,17 +333,17 @@ const Navbar = () => {
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
-                            <FaUserCircle className="w-7 h-7 text-primary" />
+                            <FaUserCircle className="w-5 h-5 text-primary" />
                           </div>
                         )}
                       </div>
                     </div>
-                    <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-base-100 rounded-full z-10 shadow-lg"></div>
+                    <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-400 border-2 border-base-100 rounded-full z-10"></div>
                   </div>
-                  <span className="max-w-[140px] truncate font-medium">
+                  <span className="max-w-[120px] truncate font-medium text-xs">
                     {profile.name}
                   </span>
-                  <FaChevronDown className={`w-3 h-3 ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
+                  <FaChevronDown className={`w-2.5 h-2.5 ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Profile Dropdown */}
@@ -437,7 +437,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="ml-4 px-6 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-primary to-secondary text-white shadow-lg hover:shadow-primary/20"
+                className="ml-2 px-4 py-1.5 rounded-lg text-sm font-medium bg-gradient-to-r from-primary to-secondary text-white shadow hover:shadow-primary/20"
               >
                 {t('login') || 'Login'}
               </Link>

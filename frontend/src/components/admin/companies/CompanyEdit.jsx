@@ -33,7 +33,7 @@ const TabButton = memo(({ tab, isActive, onClick }) => (
 
 // Memoized Loading Skeleton Component
 const LoadingSkeleton = memo(() => (
-  <div className="container mx-auto p-6 max-w-6xl min-h-screen bg-base-100 pt-20">
+  <div className="container mx-auto p-6 max-w-6xl min-h-screen bg-base-100 pt-14">
     <div className="max-w-6xl mx-auto">
       {/* Header Skeleton */}
       <div className="flex items-center justify-between mb-8">
@@ -580,7 +580,7 @@ const CompanyEdit = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-6xl min-h-screen pt-20">
+    <div className="container mx-auto p-6 max-w-6xl min-h-screen pt-14">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">

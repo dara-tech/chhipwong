@@ -7,7 +7,7 @@ import usePaymentGateways from '../hooks/usePaymentGateways';
 
 // Memoized Loading Skeleton Component
 const LoadingSkeleton = memo(() => (
-  <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 p-4 pt-20">
+  <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 p-4 pt-14">
     <div className="max-w-4xl mx-auto">
       {/* Header Skeleton */}
       <div className="bg-base-100/95 backdrop-blur-sm rounded-xl shadow-xl p-6 mb-6">
@@ -191,7 +191,7 @@ const PaymentViewerPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 p-4 pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 p-4 pt-14">
       <div className="max-w-4xl mx-auto">
         <div className="bg-base-100/95 backdrop-blur-sm rounded-xl shadow-xl p-6 mb-6">
           <div className="flex justify-between items-center">

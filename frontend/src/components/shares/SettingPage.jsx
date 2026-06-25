@@ -11,7 +11,7 @@ const Setting = () => {
   const { theme, setTheme } = useThemeStore();
 
   return (
-    <div className=" container mx-auto pt-20 max-w-5xl h-screen   p-6">
+    <div className=" container mx-auto pt-14 max-w-5xl h-screen   p-6">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>

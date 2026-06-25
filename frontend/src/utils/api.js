@@ -254,52 +254,65 @@ export const API_COMMANDS = {
   execute: executeCommand
 };
 
-// Binance API configuration
-const BINANCE_API = {
-  BASE_URL: 'https://api.binance.com/api/v3',
-  WS_URL: 'wss://stream.binance.com:9443/ws',
+// Kraken API configuration
+const getKrakenSymbol = (binanceSymbol) => {
+  const map = {
+    'BTCUSDT': 'XBTUSD',
+    'ETHUSDT': 'ETHUSD',
+    'SOLUSDT': 'SOLUSD',
+    'BNBUSDT': 'BNBUSD',
+    'ADAUSDT': 'ADAUSD',
+    'XRPUSDT': 'XRPUSD',
+    'DOTUSDT': 'DOTUSD',
+    'DOGEUSDT': 'XDGUSD',
+    'AVAXUSDT': 'AVAXUSD',
+    'LINKUSDT': 'LINKUSD'
+  };
+  return map[binanceSymbol] || binanceSymbol.replace('USDT', 'USD');
+};
+
+const getKrakenInterval = (binanceInterval) => {
+  const map = {
+    '1m': 1, '5m': 5, '15m': 15, '30m': 30,
+    '1h': 60, '4h': 240, '1d': 1440, '1w': 10080
+  };
+  return map[binanceInterval] || 1440;
+};
+
+const KRAKEN_API = {
+  // Use Vite proxy in dev to avoid CORS.
+  BASE_URL: '/kraken',
+  WS_URL: 'wss://ws.kraken.com',
   
   // Market data endpoints
   getMarketData: (params = {}) => {
-    // Binance requires specific parameters for ticker/24hr
-    const queryParams = new URLSearchParams();
     if (params.symbol) {
-      queryParams.append('symbol', params.symbol.toUpperCase());
+      return `${KRAKEN_API.BASE_URL}/Ticker?pair=${getKrakenSymbol(params.symbol)}`;
     }
-    return `${BINANCE_API.BASE_URL}/ticker/24hr?${queryParams}`;
+    return `${KRAKEN_API.BASE_URL}/Ticker`; // Get all pairs
   },
   
   // Historical data endpoints
   getHistoricalData: (symbol, interval = '1d', limit = 365) => {
-    const queryParams = new URLSearchParams({
-      symbol: symbol.toUpperCase(),
-      interval,
-      limit: limit.toString()
-    });
-    
-    return `${BINANCE_API.BASE_URL}/klines?${queryParams}`;
+    return `${KRAKEN_API.BASE_URL}/OHLC?pair=${getKrakenSymbol(symbol)}&interval=${getKrakenInterval(interval)}`;
   },
   
   // Coin details endpoint
   getCoinDetails: (symbol) => {
-    const queryParams = new URLSearchParams({
-      symbol: symbol.toUpperCase()
-    });
-    
-    return `${BINANCE_API.BASE_URL}/ticker/24hr?${queryParams}`;
+    return `${KRAKEN_API.BASE_URL}/Ticker?pair=${getKrakenSymbol(symbol)}`;
   },
 
   // Get all trading pairs
   getAllSymbols: () => {
-    return `${BINANCE_API.BASE_URL}/exchangeInfo`;
+    return `${KRAKEN_API.BASE_URL}/AssetPairs`;
   }
 };
 
 // Main fetch utility
 export const fetchWithCache = async (url, options = {}) => {
   const cacheKey = `${url}-${JSON.stringify(options)}`;
-  const cacheType = url.includes('klines') ? 'HISTORICAL_DATA' : 
-                   url.includes('ticker') ? 'MARKET_DATA' : 
+  const cacheType = url.includes('OHLC') || url.includes('klines') ? 'HISTORICAL_DATA' : 
+                   url.includes('Ticker') || url.includes('ticker') ? 'MARKET_DATA' : 
                    'COIN_DETAILS';
   
   // Try to get from cache first
@@ -341,16 +354,10 @@ export const fetchWithCache = async (url, options = {}) => {
       const retryAfter = parseInt(response.headers.get('Retry-After') || '60', 10);
       RATE_LIMIT.backoffTime = retryAfter * 1000;
       
-      // Try to get fallback data
       const fallback = getFallbackData(cacheKey);
-      if (fallback) {
-        return fallback;
-      }
+      if (fallback) return fallback;
       
-      throw new APIError(
-        `Rate limit exceeded. Please wait ${retryAfter} seconds.`,
-        429
-      );
+      throw new APIError(`Rate limit exceeded. Please wait ${retryAfter} seconds.`, 429);
     }
     
     if (response.status === 401) {
@@ -358,18 +365,82 @@ export const fetchWithCache = async (url, options = {}) => {
     }
     
     if (!response.ok) {
-      // Try to get fallback data on any error
       const fallback = getFallbackData(cacheKey);
-      if (fallback) {
-        return fallback;
-      }
-      
+      if (fallback) return fallback;
       throw new APIError(`HTTP error! status: ${response.status}`, response.status);
     }
     
     const data = await response.json();
-    setCachedData(cacheKey, data, cacheType);
-    return data;
+    
+    // Format Kraken Response to look like Binance
+    let parsedData = data;
+    if (data && data.error && data.error.length > 0) {
+      throw new APIError(data.error[0], 500);
+    }
+    if (data && data.result) {
+      if (cacheType === 'HISTORICAL_DATA') {
+        const pairKey = Object.keys(data.result).find(k => k !== 'last');
+        if (pairKey && Array.isArray(data.result[pairKey])) {
+          // Kraken OHLC map to Binance: [openTime, open, high, low, close, volume]
+          parsedData = data.result[pairKey].map(k => [
+            k[0] * 1000, k[1], k[2], k[3], k[4], k[6]
+          ]);
+        }
+      } else if (cacheType === 'MARKET_DATA' || cacheType === 'COIN_DETAILS') {
+        // If url has a pair parameter, it's a single coin. Otherwise, it's all coins.
+        const isSingleCoin = url.includes('pair=');
+        
+        if (isSingleCoin) {
+          const pairKey = Object.keys(data.result)[0];
+          if (pairKey) {
+            const ticker = data.result[pairKey];
+            const close = parseFloat(ticker.c[0]);
+            const open = parseFloat(ticker.o);
+            const priceChangePercent = ((close - open) / open) * 100;
+            parsedData = {
+              lastPrice: ticker.c[0],
+              priceChangePercent: priceChangePercent.toFixed(2),
+              volume: ticker.v[1],
+              quoteVolume: (parseFloat(ticker.v[1]) * close).toString()
+            };
+          }
+        } else {
+          // It's all coins. Binance returns an array.
+          // Map Kraken keys (e.g. XBTUSD) back to Binance-like symbols (BTCUSDT)
+          const reverseSymbolMap = {
+            'XBTUSD': 'BTCUSDT',
+            'XXBTZUSD': 'BTCUSDT',
+            'ETHUSD': 'ETHUSDT',
+            'XETHZUSD': 'ETHUSDT',
+            'SOLUSD': 'SOLUSDT',
+            'BNBUSD': 'BNBUSDT',
+            'ADAUSD': 'ADAUSDT',
+            'XRPUSD': 'XRPUSDT',
+            'DOTUSD': 'DOTUSDT',
+            'XDGUSD': 'DOGEUSDT',
+            'AVAXUSD': 'AVAXUSDT',
+            'LINKUSD': 'LINKUSDT'
+          };
+          
+          parsedData = Object.keys(data.result).map(pairKey => {
+            const ticker = data.result[pairKey];
+            const close = parseFloat(ticker.c[0]);
+            const open = parseFloat(ticker.o);
+            const priceChangePercent = ((close - open) / open) * 100;
+            return {
+              symbol: reverseSymbolMap[pairKey] || pairKey,
+              lastPrice: ticker.c[0],
+              priceChangePercent: priceChangePercent.toFixed(2),
+              volume: ticker.v[1],
+              quoteVolume: (parseFloat(ticker.v[1]) * close).toString()
+            };
+          });
+        }
+      }
+    }
+
+    setCachedData(cacheKey, parsedData, cacheType);
+    return parsedData;
   } catch (error) {
     if (error instanceof APIError) {
       throw error;
@@ -437,5 +508,5 @@ export const useFetch = (url, options = {}) => {
   };
 };
 
-// Export Binance API
-export const API = BINANCE_API; 
+// Export Kraken API
+export const API = KRAKEN_API; 

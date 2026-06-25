@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const ProfileSkeleton = () => {
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 pt-20">
+    <div className="container mx-auto px-4 py-8 min-h-screen bg-gradient-to-br from-base-100 via-base-200 to-base-300 pt-14">
       <div className="max-w-5xl mx-auto">
         {/* Title Skeleton */}
         <div className="h-10 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl w-1/3 mb-8 animate-pulse"></div>
@@ -267,7 +267,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen pt-20">
+    <div className="container mx-auto px-4 py-8 min-h-screen pt-14">
       <div className="max-w-5xl mx-auto">
         <motion.h1 
           initial={{ opacity: 0, y: -20 }}

@@ -124,37 +124,33 @@ const UserManagementPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-base-200 pt-20">
+    <div className="flex flex-col h-screen bg-base-200 pt-14">
       <header className={`sticky top-0 z-30 bg-base-100/90 backdrop-blur-lg border-b ${isHeaderScrolled ? 'border-base-300/50 shadow-sm' : 'border-transparent'}`}>
-        <div className="p-4 md:p-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+        <div className="p-3 md:p-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 mb-3">
             <div>
-              <h1 className="text-3xl font-bold text-base-content">User Management</h1>
-              <p className="text-base-content/70">Manage all users in the system.</p>
+              <h1 className="text-xl font-bold text-base-content">User Management</h1>
+              <p className="text-sm text-base-content/60">Manage all users in the system.</p>
             </div>
-            {/* <Link to="/admin/users/new" className="btn btn-primary w-full md:w-auto">
-              <Plus className="w-4 h-4 mr-2" />
-              Add New User
-            </Link> */}
           </div>
-          <div className="flex flex-col md:flex-row gap-4 items-center">
+          <div className="flex flex-col md:flex-row gap-3 items-center">
             <div className="relative flex-grow w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-base-content/50" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-base-content/50" />
               <input
                 type="text"
                 placeholder="Search by name or email..."
                 value={searchQuery}
                 onChange={handleSearchChange}
-                className="input input-bordered w-full pl-10"
+                className="input input-bordered input-sm w-full pl-9"
               />
             </div>
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost">
-                <Filter className="w-4 h-4 mr-2" />
+              <label tabIndex={0} className="btn btn-ghost btn-sm">
+                <Filter className="w-3.5 h-3.5 mr-1.5" />
                 Filter by Role
-                <ChevronDown className="w-4 h-4 ml-1" />
+                <ChevronDown className="w-3.5 h-3.5 ml-1" />
               </label>
-              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-40">
+              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-48 z-40">
                 <li><a onClick={() => handleFilterChange('')} className={!filterType ? 'font-bold' : ''}>All Roles</a></li>
                 {isSuperAdmin && <li><a onClick={() => handleFilterChange('super_admin')} className={filterType === 'super_admin' ? 'font-bold' : ''}>Super Admin</a></li>}
                 <li><a onClick={() => handleFilterChange('admin')} className={filterType === 'admin' ? 'font-bold' : ''}>Admin</a></li>
@@ -166,23 +162,23 @@ const UserManagementPage = () => {
         </div>
       </header>
 
-      <main className="flex-grow overflow-y-auto p-4 md:p-6">
+      <main className="flex-grow overflow-y-auto p-3 md:p-4">
         {loading && (
-          <div className="text-center py-12">
-            <span className="loading loading-lg loading-spinner text-primary"></span>
+          <div className="text-center py-8">
+            <span className="loading loading-spinner loading-md text-primary"></span>
           </div>
         )}
-        {error && <div className="alert alert-error shadow-lg"><div><AlertCircle /><span>{error}</span></div></div>}
+        {error && <div className="alert alert-error shadow-sm text-sm"><div><AlertCircle className="w-4 h-4" /><span>{error}</span></div></div>}
         {!loading && !error && (
           <>
             {totalUsers > 0 ? (
-              <div className="overflow-x-auto bg-base-100 rounded-xl shadow-lg">
-                <table className="table w-full">
+              <div className="overflow-x-auto bg-base-100 rounded-xl shadow">
+                <table className="table table-sm w-full">
                   <thead className="bg-base-200 sticky top-0 z-10">
                     <tr>
-                      <th className="p-4">User</th>
-                      <th className="p-4">Role</th>
-                      <th className="p-4 text-center">Actions</th>
+                      <th className="p-3 text-xs font-semibold uppercase tracking-wide text-base-content/60">User</th>
+                      <th className="p-3 text-xs font-semibold uppercase tracking-wide text-base-content/60">Role</th>
+                      <th className="p-3 text-xs font-semibold uppercase tracking-wide text-base-content/60 text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -190,34 +186,34 @@ const UserManagementPage = () => {
                       <tr 
                         key={user._id} 
                         onClick={() => handleEditClick(user)} 
-                        className={`transition-colors duration-200 cursor-pointer ${user._id === profile?.id ? 'bg-primary/5' : 'hover:bg-base-200'}`}>
-                        <td className="p-4">
-                          <div className="flex items-center space-x-3">
+                        className={`transition-colors duration-150 cursor-pointer ${user._id === profile?.id ? 'bg-primary/5' : 'hover:bg-base-200/60'}`}>
+                        <td className="p-2.5">
+                          <div className="flex items-center space-x-2.5">
                             <div className="avatar placeholder">
-                              <div className="bg-neutral-focus text-neutral-content rounded-full w-10 h-10">
-                                <span className="text-sm font-semibold">{user.name.charAt(0).toUpperCase()}</span>
+                              <div className="bg-neutral-focus text-neutral-content rounded-full w-8 h-8">
+                                <span className="text-xs font-semibold">{user.name.charAt(0).toUpperCase()}</span>
                               </div>
                             </div>
                             <div>
-                              <div className="font-bold flex items-center gap-2">
+                              <div className="text-sm font-semibold flex items-center gap-1.5">
                                 {user.name}
                                 {user._id === profile?.id && <span className="badge badge-xs badge-outline badge-primary font-bold">You</span>}
                               </div>
-                              <div className="text-sm opacity-50">{user.email}</div>
+                              <div className="text-xs opacity-50">{user.email}</div>
                             </div>
                           </div>
                         </td>
-                        <td className="p-4">{getRoleBadge(user.type)}</td>
-                        <td className="p-4 text-center">
+                        <td className="p-2.5">{getRoleBadge(user.type)}</td>
+                        <td className="p-2.5 text-center">
                           <button 
                             onClick={(e) => {
                               e.stopPropagation();
                               handleDeleteAttempt(user);
                             }} 
-                            className="btn btn-ghost btn-sm text-error hover:bg-error/10" 
+                            className="btn btn-ghost btn-xs text-error hover:bg-error/10" 
                             title="Delete user"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </td>
                       </tr>
@@ -226,9 +222,9 @@ const UserManagementPage = () => {
                 </table>
               </div>
             ) : (
-              <div className="text-center py-12 bg-base-100 rounded-xl shadow-lg">
-                <h3 className="text-lg font-semibold">No users found</h3>
-                <p className="text-base-content/60">Try adjusting your search or filters.</p>
+              <div className="text-center py-10 bg-base-100 rounded-xl shadow">
+                <h3 className="text-base font-semibold">No users found</h3>
+                <p className="text-sm text-base-content/60 mt-1">Try adjusting your search or filters.</p>
               </div>
             )}
           </>

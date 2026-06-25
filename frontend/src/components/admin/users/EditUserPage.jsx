@@ -96,7 +96,7 @@ const EditUserPage = () => {
   if (invalidId) {
     return (
       <div className="container mx-auto p-4 md:p-6 lg:p-8 min-h-screen">
-        <div className="max-w-2xl mx-auto space-y-6 pt-20">
+        <div className="max-w-2xl mx-auto space-y-6 pt-14">
           <div className="alert alert-error shadow-lg">
             <div className="flex items-center gap-2">
               <AlertCircle className="w-5 h-5" />
@@ -111,7 +111,7 @@ const EditUserPage = () => {
   if (loading && !user) {
     return (
       <div className="container mx-auto p-4 md:p-6 lg:p-8 min-h-screen">
-        <div className="max-w-2xl mx-auto space-y-6 pt-20">
+        <div className="max-w-2xl mx-auto space-y-6 pt-14">
           {/* Cyberpunk-style title skeleton */}
           <div className="space-y-3">
             <div className="relative">
@@ -173,7 +173,7 @@ const EditUserPage = () => {
 
   return (
     <div className="container mx-auto p-4 md:p-6 lg:p-8 min-h-screen">
-      <div className="max-w-2xl mx-auto space-y-6 pt-20">
+      <div className="max-w-2xl mx-auto space-y-6 pt-14">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Edit User

@@ -31,23 +31,23 @@ const CHART_TYPES = [
 ];
 
 const StatCard = ({ icon: Icon, label, value, change, isPositive }) => (
-  <div className="card bg-base-100 shadow-sm hover:shadow-md transition-all duration-200">
-    <div className="card-body p-4">
+  <div className="card bg-base-100 shadow-sm border border-base-200 hover:shadow-md transition-all duration-200">
+    <div className="p-3 sm:p-4">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center space-x-2">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Icon className="w-4 h-4 text-primary" />
+          <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
+            <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
           </div>
-          <span className="text-sm font-medium text-base-content/70">{label}</span>
+          <span className="text-xs sm:text-sm font-medium text-base-content/70">{label}</span>
         </div>
         {change !== null && change !== undefined && (
-          <div className={`badge ${isPositive ? 'badge-success' : 'badge-error'}`}>
-            {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-            <span className="text-xs font-semibold">{Math.abs(change).toFixed(2)}%</span>
+          <div className={`badge badge-sm sm:badge-md ${isPositive ? 'badge-success' : 'badge-error'}`}>
+            {isPositive ? <TrendingUp className="w-2 h-2 sm:w-3 sm:h-3" /> : <TrendingDown className="w-2 h-2 sm:w-3 sm:h-3" />}
+            <span className="text-[10px] sm:text-xs font-semibold ml-0.5">{Math.abs(change).toFixed(2)}%</span>
           </div>
         )}
       </div>
-      <p className="text-lg font-bold text-base-content">{value}</p>
+      <p className="text-sm sm:text-lg font-bold text-base-content">{value}</p>
     </div>
   </div>
 );
@@ -351,20 +351,20 @@ const AdvancedTradingChart = () => {
   };
 
   return (
-    <div className={`card bg-base-100  ${isFullscreen ? 'fixed inset-4 z-50' : ''}`}>
+    <div className={`card bg-base-100 shadow-xl ${isFullscreen ? 'fixed inset-4 z-50' : ''}`}>
       {/* Header */}
-      <div className="card-body bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-200">
+      <div className="p-4 sm:p-6 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-b border-base-200 rounded-t-2xl">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <CryptoLogo coin={selectedCoinData} size="lg" />
               <div>
-                <h1 className="text-2xl font-bold text-base-content">
+                <h1 className="text-xl sm:text-2xl font-bold text-base-content">
                   {selectedCoinData?.name}
                 </h1>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-base-content/70">{selectedCoinData?.symbol}</span>
-                  <span className={`badge ${priceStats.priceChange >= 0 ? 'badge-success' : 'badge-error'}`}>
+                  <span className="text-xs sm:text-sm text-base-content/70">{selectedCoinData?.symbol}</span>
+                  <span className={`badge badge-sm sm:badge-md ${priceStats.priceChange >= 0 ? 'badge-success' : 'badge-error'}`}>
                     {priceStats.priceChange >= 0 ? '+' : ''}{priceStats.priceChange.toFixed(2)}%
                   </span>
                 </div>
@@ -409,57 +409,60 @@ const AdvancedTradingChart = () => {
       </div>
 
       {/* Stats Cards */}
-      {/* Mobile Card View for Stats */}
-      <div className="block sm:hidden card-body border-b border-base-200">
+      {/* Mobile Stats View (Clean flat layout) */}
+      <div className="block sm:hidden p-0 py-2 border-b border-base-200">
         {isLoading ? (
-          <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="card bg-base-200">
-                <div className="card-body p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-8 h-8 bg-base-300 rounded-lg"></div>
-                    <div className="h-4 bg-base-300 rounded w-20"></div>
-                  </div>
-                  <div className="h-6 bg-base-300 rounded w-24"></div>
-                </div>
+              <div key={i} className="animate-pulse flex flex-col gap-1">
+                <div className="h-3 bg-base-300 rounded w-16"></div>
+                <div className="h-4 bg-base-300 rounded w-20"></div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="space-y-3">
-            <StatCard
-              icon={DollarSign}
-              label="Current Price"
-              value={`${priceStats.currentPrice.toLocaleString()}`}
-              change={priceStats.priceChange}
-              isPositive={priceStats.priceChange >= 0}
-            />
-            <StatCard
-              icon={Activity}
-              label="24h Volume"
-              value={`${(priceStats.volume24h / 1000000).toFixed(2)}M`}
-            />
-            <StatCard
-              icon={TrendingUp}
-              label="Market Cap"
-              value={`${(priceStats.marketCap / 1000000000).toFixed(2)}B`}
-            />
-            <StatCard
-              icon={Calendar}
-              label="Period"
-              value={TIME_RANGES.find(r => r.value === timeRange)?.description}
-            />
+          <div className="grid grid-cols-2 gap-y-4 gap-x-2">
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="text-[11px] text-base-content/60 uppercase font-semibold">Price</span>
+                <span className={`text-[10px] font-bold ${priceStats.priceChange >= 0 ? 'text-success' : 'text-error'}`}>
+                  {priceStats.priceChange >= 0 ? '+' : ''}{priceStats.priceChange.toFixed(2)}%
+                </span>
+              </div>
+              <span className="text-[15px] font-bold leading-none">${priceStats.currentPrice.toLocaleString()}</span>
+            </div>
+            
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="text-[11px] text-base-content/60 uppercase font-semibold">24h Vol</span>
+              </div>
+              <span className="text-[15px] font-bold leading-none">${(priceStats.volume24h / 1000000).toFixed(1)}M</span>
+            </div>
+
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="text-[11px] text-base-content/60 uppercase font-semibold">Mkt Cap</span>
+              </div>
+              <span className="text-[15px] font-bold leading-none">${(priceStats.marketCap / 1000000000).toFixed(1)}B</span>
+            </div>
+
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="text-[11px] text-base-content/60 uppercase font-semibold">Period</span>
+              </div>
+              <span className="text-[15px] font-bold leading-none">{TIME_RANGES.find(r => r.value === timeRange)?.label || 'All'}</span>
+            </div>
           </div>
         )}
       </div>
       {/* Desktop Stats Grid (hidden on mobile) */}
-      <div className="hidden sm:block card-body border-b border-base-200">
+      <div className="hidden sm:block p-6 border-b border-base-200 bg-base-100/50">
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[...Array(4)].map((_, i) => (
               <div key={i}>
-                <div className="card bg-base-200">
-                  <div className="card-body p-4">
+                <div className="card bg-base-200 animate-pulse">
+                  <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center space-x-2">
                         <div className="w-8 h-8 bg-base-300 rounded-lg"></div>
@@ -478,19 +481,19 @@ const AdvancedTradingChart = () => {
             <StatCard
               icon={DollarSign}
               label="Current Price"
-              value={`${priceStats.currentPrice.toLocaleString()}`}
+              value={`$${priceStats.currentPrice.toLocaleString()}`}
               change={priceStats.priceChange}
               isPositive={priceStats.priceChange >= 0}
             />
             <StatCard
               icon={Activity}
               label="24h Volume"
-              value={`${(priceStats.volume24h / 1000000).toFixed(2)}M`}
+              value={`$${(priceStats.volume24h / 1000000).toFixed(2)}M`}
             />
             <StatCard
               icon={TrendingUp}
               label="Market Cap"
-              value={`${(priceStats.marketCap / 1000000000).toFixed(2)}B`}
+              value={`$${(priceStats.marketCap / 1000000000).toFixed(2)}B`}
             />
             <StatCard
               icon={Calendar}
@@ -502,28 +505,26 @@ const AdvancedTradingChart = () => {
       </div>
 
       {/* Controls */}
-      <div className="card-body border-b border-base-200">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-outline normal-case font-normal">
-                <div className="flex items-center gap-2 overflow-hidden">
-                  <span className="font-bold text-lg" style={{color: selectedCoinData?.color}}>{selectedCoinData?.symbol}</span>
-                  <span className="truncate">{selectedCoinData?.name}</span>
+      <div className="p-0 py-2 sm:p-6 border-b border-base-200">
+        <div className="flex flex-col sm:flex-row justify-between gap-2.5">
+          <div className="flex items-center justify-between sm:justify-start gap-2">
+            <div className="dropdown">
+              <div tabIndex={0} role="button" className="btn btn-sm btn-outline normal-case font-normal px-2 bg-base-100">
+                <div className="flex items-center gap-1.5 overflow-hidden">
+                  <span className="font-bold text-[13px] sm:text-lg" style={{color: selectedCoinData?.color}}>{selectedCoinData?.symbol}</span>
+                  <span className="truncate hidden sm:inline">{selectedCoinData?.name}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-base-content/50" />
                 </div>
-                <ChevronDown className="w-4 h-4 text-base-content/50 flex-shrink-0" />
               </div>
-              <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-56 mt-2">
+              <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-48 mt-2">
                 {POPULAR_COINS.map(coin => (
                   <li key={coin.id}>
                     <button 
                       onClick={() => {
                         setSelectedCoin(coin.id);
-                        if (document.activeElement) {
-                          document.activeElement.blur();
-                        }
+                        if (document.activeElement) document.activeElement.blur();
                       }} 
-                      className="flex items-center gap-2 w-full"
+                      className="flex items-center gap-2 w-full text-sm"
                     >
                       <CryptoLogo coin={coin} size="sm" />
                       <span>{coin.name} ({coin.symbol})</span>
@@ -533,15 +534,37 @@ const AdvancedTradingChart = () => {
               </ul>
             </div>
             
-            <div className="join">
+            <div className="join bg-base-200/50 rounded-lg">
+              {CHART_TYPES.map(type => {
+                const Icon = type.icon;
+                return (
+                  <button
+                    key={type.value}
+                    onClick={() => setChartType(type.value)}
+                    className={`join-item btn btn-sm px-2.5 ${
+                      chartType === type.value
+                        ? 'btn-primary'
+                        : 'btn-ghost'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline ml-1 text-xs">{type.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          
+          <div className="w-full sm:w-auto overflow-x-auto hide-scrollbar -mx-3 px-3 sm:mx-0 sm:px-0">
+            <div className="join w-full sm:w-auto min-w-max bg-base-200/50 rounded-lg p-0.5">
               {TIME_RANGES.map(range => (
                 <button
                   key={range.value}
                   onClick={() => setTimeRange(range.value)}
-                  className={`join-item btn btn-sm ${
+                  className={`join-item btn btn-sm flex-1 sm:flex-none border-none text-[11px] sm:text-xs font-medium px-3 ${
                     timeRange === range.value
-                      ? 'btn-primary'
-                      : 'btn-ghost'
+                      ? 'bg-base-100 shadow-sm text-base-content'
+                      : 'btn-ghost text-base-content/60 hover:bg-transparent'
                   }`}
                 >
                   {range.label}
@@ -549,37 +572,18 @@ const AdvancedTradingChart = () => {
               ))}
             </div>
           </div>
-          
-          <div className="join">
-            {CHART_TYPES.map(type => {
-              const Icon = type.icon;
-              return (
-                <button
-                  key={type.value}
-                  onClick={() => setChartType(type.value)}
-                  className={`join-item btn btn-sm ${
-                    chartType === type.value
-                      ? 'btn-primary'
-                      : 'btn-ghost'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{type.label}</span>
-                </button>
-              );
-            })}
-          </div>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="card-body">
+      <div className="p-0 sm:p-6 pb-0 mt-0">
         <div 
           style={{ 
             transform: `scale(${zoomLevel})`, 
             transformOrigin: 'center',
-            height: isFullscreen ? '60vh' : '400px'
+            height: isFullscreen ? '60vh' : '350px'
           }}
+          className="w-full"
         >
           <ResponsiveContainer width="100%" height="100%">
             {renderChart()}
@@ -588,13 +592,13 @@ const AdvancedTradingChart = () => {
       </div>
 
       {/* Footer */}
-      <div className="card-body bg-base-200/50 border-t border-base-200">
-        <div className="flex justify-between items-center text-sm text-base-content/70">
-          <p className="flex items-center space-x-2">
-            <span>Powered by Binance API</span>
-            <span className={`w-2 h-2 rounded-full ${error ? 'bg-error' : 'bg-success'}`}></span>
+      <div className="p-0 py-2 sm:p-4 bg-base-200/50 border-t border-base-200 sm:rounded-b-2xl mt-0 sm:mt-4">
+        <div className="flex justify-between items-center text-[10px] sm:text-sm text-base-content/70">
+          <p className="flex items-center space-x-1.5">
+            <span>Powered by Binance</span>
+            <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${error ? 'bg-error' : 'bg-success'}`}></span>
           </p>
-          <p>Last updated: {new Date().toLocaleString()}</p>
+          <p>Updated: {new Date().toLocaleTimeString()}</p>
         </div>
       </div>
     </div>
