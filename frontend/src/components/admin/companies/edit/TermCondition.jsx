@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -9,7 +9,7 @@ import ListItem from '@tiptap/extension-list-item'
 import Bold from '@tiptap/extension-bold'
 import Italic from '@tiptap/extension-italic'
 import Paragraph from '@tiptap/extension-paragraph'
-import { FaBold, FaItalic, FaUnderline, FaListUl, FaListOl, FaFileContract } from 'react-icons/fa'
+import { FaBold, FaItalic, FaUnderline, FaListUl, FaListOl, FaFileContract, FaUpload, FaFilePdf, FaTrash } from 'react-icons/fa'
 
 // 🎯 Toolbar with advanced controls
 const Toolbar = ({ editor }) => {
@@ -85,6 +85,25 @@ const Toolbar = ({ editor }) => {
 
 const TermsAndConditions = ({ formData, onInputChange }) => {
   const { t } = useTranslation();
+  const fileInputRef = useRef(null);
+
+  const handlePdfUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      onInputChange({ target: { name: 'termsPdf', value: file } });
+    }
+  };
+
+  const handleRemovePdf = () => {
+    onInputChange({ target: { name: 'termsPdf', value: null } });
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const hasPdf = !!formData.termsPdf;
+  const pdfUrl = formData.termsPdf instanceof File 
+    ? URL.createObjectURL(formData.termsPdf) 
+    : formData.termsPdf;
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -119,32 +138,78 @@ const TermsAndConditions = ({ formData, onInputChange }) => {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-1">
-        <h3 className="text-xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          {t('termsAndConditions.title')}
-        </h3>
-        <p className="text-sm text-base-content/60">
-          {t('termsAndConditions.description', 'Define your company\'s terms and conditions')}
-        </p>
-      </div>
-
-      <div className="rounded-xl border border-base-300 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-        <Toolbar editor={editor} />
-        <div className="p-4 min-h-[16rem] bg-base-100">
-          <EditorContent 
-            editor={editor} 
-            className="prose prose-sm max-w-none focus:outline-none min-h-[12rem]"
-          />
-        </div>
-      </div>
-
-      {!formData.termsConditions && (
-        <div className="text-center py-8 bg-base-200/50 rounded-xl border border-dashed border-base-300">
-          <FaFileContract className="mx-auto text-4xl text-base-content/30 mb-4" />
-          <p className="text-base-content/60 text-lg">
-            {t('termsAndConditions.emptyState', 'No terms and conditions defined yet')}
+      <div className="space-y-1 flex justify-between items-center">
+        <div>
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('termsAndConditions.title', 'Terms and Conditions')}
+          </h3>
+          <p className="text-sm text-base-content/60">
+            {t('termsAndConditions.description', 'Define your company\'s terms and conditions or upload a PDF')}
           </p>
         </div>
+        
+        <div>
+          <input
+            type="file"
+            accept="application/pdf"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handlePdfUpload}
+          />
+          {!hasPdf && (
+            <button 
+              type="button"
+              className="btn btn-outline btn-primary gap-2"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <FaUpload /> {t('termsAndConditions.uploadPdf', 'Upload PDF')}
+            </button>
+          )}
+        </div>
+      </div>
+
+      {hasPdf ? (
+        <div className="rounded-xl border border-base-300 shadow-lg overflow-hidden bg-base-100 flex flex-col">
+          <div className="flex justify-between items-center p-3 border-b border-base-300 bg-base-200/50">
+            <div className="flex items-center gap-2 text-primary font-medium">
+              <FaFilePdf className="text-xl" />
+              <span>PDF Document Uploaded</span>
+            </div>
+            <button 
+              type="button" 
+              className="btn btn-sm btn-error btn-ghost"
+              onClick={handleRemovePdf}
+            >
+              <FaTrash /> {t('termsAndConditions.removePdf', 'Remove PDF')}
+            </button>
+          </div>
+          <iframe 
+            src={pdfUrl} 
+            className="w-full h-[600px] border-none"
+            title="Terms and Conditions PDF"
+          />
+        </div>
+      ) : (
+        <>
+          <div className="rounded-xl border border-base-300 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+            <Toolbar editor={editor} />
+            <div className="p-4 min-h-[16rem] bg-base-100">
+              <EditorContent 
+                editor={editor} 
+                className="prose prose-sm max-w-none focus:outline-none min-h-[12rem]"
+              />
+            </div>
+          </div>
+
+          {!formData.termsConditions && (
+            <div className="text-center py-8 bg-base-200/50 rounded-xl border border-dashed border-base-300">
+              <FaFileContract className="mx-auto text-4xl text-base-content/30 mb-4" />
+              <p className="text-base-content/60 text-lg">
+                {t('termsAndConditions.emptyState', 'No terms and conditions defined yet')}
+              </p>
+            </div>
+          )}
+        </>
       )}
     </div>
   )

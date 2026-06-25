@@ -145,19 +145,22 @@ export const updateCompany = async (req, res) => {
       }
     });
 
-    // --- Handle all image uploads ---
+    // --- Handle all file uploads ---
     const uploadToCloudinary = (buffer, folder) => {
       return new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream({ folder }, (error, result) => {
-          if (error) return reject(error);
-          resolve(result.secure_url);
-        });
+        const uploadStream = cloudinary.uploader.upload_stream(
+          { folder, resource_type: 'auto' }, 
+          (error, result) => {
+            if (error) return reject(error);
+            resolve(result.secure_url);
+          }
+        );
         uploadStream.end(buffer);
       });
     };
 
-    // Handle single image fields
-    const singleImageFields = ['logo', 'aboutImage', 'missionImage', 'visionImage', 'heroImage', 'paymentQR'];
+    // Handle single file fields
+    const singleImageFields = ['logo', 'aboutImage', 'missionImage', 'visionImage', 'heroImage', 'paymentQR', 'termsPdf'];
     for (const field of singleImageFields) {
       if (req.files?.[field]?.[0]) {
         try {

@@ -356,7 +356,7 @@ const AdvancedCryptoTable = () => {
             </div>
             <div>
               <h1 className="text-lg md:text-2xl font-bold text-base-content">Cryptocurrency Market</h1>
-              <p className="text-xs md:text-sm text-base-content/70">Real-time market data powered by Binance API</p>
+              <p className="text-xs md:text-sm text-base-content/70">Real-time market data powered by Kraken API</p>
             </div>
           </div>
 

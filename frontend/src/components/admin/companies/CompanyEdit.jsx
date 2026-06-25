@@ -107,7 +107,8 @@ const CompanyEdit = () => {
     programsOffered: [],
     testimonials: [],
     FAQs: [],
-    professionals: []
+    professionals: [],
+    termsPdf: null
   });
 
   const [loading, setLoading] = useState(true);
@@ -171,7 +172,8 @@ const CompanyEdit = () => {
             programsOffered: companyData.programsOffered || [],
             testimonials: companyData.testimonials || [],
             FAQs: companyData.FAQs || [],
-            professionals: companyData.professionals || []
+            professionals: companyData.professionals || [],
+            termsPdf: companyData.termsPdfUrl || null
           });
           if (companyData.logo) {
             setLogoPreview(companyData.logo);
@@ -287,6 +289,13 @@ const CompanyEdit = () => {
       formDataToSend.append("vision", formData.vision || "");
       formDataToSend.append("privacyPolicy", formData.privacyPolicy || "");
       formDataToSend.append("termsConditions", formData.termsConditions || "");
+      
+      // Handle terms PDF if updated
+      if (formData.termsPdf instanceof File) {
+        formDataToSend.append("termsPdf", formData.termsPdf);
+      } else if (typeof formData.termsPdf === 'string') {
+        // Just keeping the old string URL if we send it back, though backend doesn't strictly need it
+      }
       
       // Handle logo file if updated
       if (formData.logo instanceof File) {

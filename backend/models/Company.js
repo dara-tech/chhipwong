@@ -19,6 +19,10 @@ const companySchema = new mongoose.Schema({
   termsConditions: {
     type: String,
   },
+  termsPdfUrl: {
+    type: String,
+    default: "",
+  },
   FAQs: [
     {
       question: { type: String, required: true },

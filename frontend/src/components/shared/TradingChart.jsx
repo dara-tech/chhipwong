@@ -592,7 +592,7 @@ const AdvancedTradingChart = () => {
       <div className="p-3 sm:p-4 bg-base-200/50 border-t border-base-200 rounded-b-2xl mt-4">
         <div className="flex justify-between items-center text-[10px] sm:text-sm text-base-content/70">
           <p className="flex items-center space-x-1.5">
-            <span>Powered by Binance</span>
+            <span>Powered by Kraken</span>
             <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${error ? 'bg-error' : 'bg-success'}`}></span>
           </p>
           <p>Updated: {new Date().toLocaleTimeString()}</p>
